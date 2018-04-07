@@ -1,0 +1,44 @@
+#+TITLE: C++ Notes
+#+AUTHOR: Nelson Rodrigues
+
+
+* Basics
+- RAII [[https://github.com/NelsonBilber/cpp.RAII][Source Code]]
+- Containers [[https://github.com/NelsonBilber/cpp.containers][Source Code]]
+- Cast [[https://github.com/NelsonBilber/cpp.cast][Source Code]]
+- Smartpointers [[https://github.com/NelsonBilber/cpp.smartpointers][Source Code]]
+- STL [[https://github.com/NelsonBilber/cpp.stl][Source Code]]
+- Object Oriented Programming [[https://github.com/NelsonBilber/cpp.oop][Source Code]]
+* Modern C++
+- Lambdas [[https://github.com/NelsonBilber/cpp.lambdas][Source Code]]
+- Concepts [[https://github.com/NelsonBilber/cpp.lambdas][Source Code]]
+- Monads [[https://github.com/NelsonBilber/cpp.monads][Source Code]]
+- Variadic Templates [[https://github.com/NelsonBilber/cpp.variadic.templates][Source Code]]
+* C++11
+[[https://github.com/AnthonyCalandra/modern-cpp-features/blob/master/CPP11.md][Link]]
+* C++14
+[[https://github.com/AnthonyCalandra/modern-cpp-features/blob/master/CPP11.md][Link]]
+* C++17
+[[https://github.com/AnthonyCalandra/modern-cpp-features/blob/master/CPP17.md][Link]]
+* Template/Metaprogramming
+** Functions
+- Arguments Deduction [[https://github.com/NelsonBilber/cpp.templates.functions.1.arguments.deduction][Source Code]]
+- Explicit Specialization [[https://github.com/NelsonBilber/cpp.templates.functions.2.explicit.specialization][Source Code]]
+- Non-Type Arguments [[https://github.com/NelsonBilber/cpp.templates.functions.3.non-type.arguments][Source Code]]
+- Variadic Templates [[https://github.com/NelsonBilber/cpp.templates.functions.4.variadic.templates][Source Code]]
+** Classes
+- Basics [[https://github.com/NelsonBilber/cpp.templates.class1.basic][Source Code]]
+- Explicit Specialization [[https://github.com/NelsonBilber/cpp.templates.class1.basic][Source Code]]
+- Partical Specialization [[https://github.com/NelsonBilber/cpp.templates.class3.partial.specialization][Source Code]]
+- Alias [[https://github.com/NelsonBilber/cpp.templates.class4.typealias][Source Code]]
+* Functional Programming
+[[https://github.com/NelsonBilber/cpp.functional.programming][Source Code]]
+* Courses
+** Learn Advanced C++ Programming Course
+[[https://github.com/NelsonBilber/cpp.udemy.advancedcpp][Source Code]]
+* Books
+** Modern C++ Design: Generic Programming and Design Patterns Applied
+[[https://github.com/NelsonBilber/cpp.loki][Loki]]
+* Links
+** Cpp Code Guidelines
+[[https://github.com/isocpp/CppCoreGuidelines][Link]]
