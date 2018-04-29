@@ -16,10 +16,8 @@ Some notes about C++ programming language ( source code, libraries, books, blogs
 - Monads [[https://github.com/NelsonBilber/cpp.monads][Source Code]]
 - Variadic Templates [[https://github.com/NelsonBilber/cpp.variadic.templates][Source Code]]
 
-[[https://github.com/AnthonyCalandra/modern-cpp-features/blob/master/CPP11.md][C++11]]
-
+[[https://github.com/AnthonyCalandra/modern-cpp-features/blob/master/CPP11.md][C++11]] 
 [[https://github.com/AnthonyCalandra/modern-cpp-features/blob/master/CPP14.md][C++14]]
-
 [[https://github.com/AnthonyCalandra/modern-cpp-features/blob/master/CPP17.md][C++17]]
 
 * Template/Meta-programming
@@ -52,6 +50,7 @@ Next link presents "just a simple" example how can be used in C++.
 * Books
 
 C++ has a lot of good books for several levels of experience. Check this link  [[https://stackoverflow.com/questions/388242/the-definitive-c-book-guide-and-list][The Definitive C++ Book Guide and List]]
+
 Personally recommend:
 
 - The C++ Programming Language
