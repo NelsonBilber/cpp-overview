@@ -1,12 +1,13 @@
 #+TITLE: C++ Notes
 #+AUTHOR: Nelson Rodrigues
 
+Some notes about C++ programming language ( source code, libraries, books, blogs, ....)
 
 * Basics
 - RAII [[https://github.com/NelsonBilber/cpp.RAII][Source Code]]
 - Containers [[https://github.com/NelsonBilber/cpp.containers][Source Code]]
 - Cast [[https://github.com/NelsonBilber/cpp.cast][Source Code]]
-- Smartpointers [[https://github.com/NelsonBilber/cpp.smartpointers][Source Code]]
+- Smart pointers [[https://github.com/NelsonBilber/cpp.smartpointers][Source Code]]
 - STL [[https://github.com/NelsonBilber/cpp.stl][Source Code]]
 - Object Oriented Programming [[https://github.com/NelsonBilber/cpp.oop][Source Code]]
 * Modern C++
@@ -14,13 +15,17 @@
 - Concepts [[https://github.com/NelsonBilber/cpp.lambdas][Source Code]]
 - Monads [[https://github.com/NelsonBilber/cpp.monads][Source Code]]
 - Variadic Templates [[https://github.com/NelsonBilber/cpp.variadic.templates][Source Code]]
-* C++11
-[[https://github.com/AnthonyCalandra/modern-cpp-features/blob/master/CPP11.md][Link]]
-* C++14
-[[https://github.com/AnthonyCalandra/modern-cpp-features/blob/master/CPP11.md][Link]]
-* C++17
-[[https://github.com/AnthonyCalandra/modern-cpp-features/blob/master/CPP17.md][Link]]
-* Template/Metaprogramming
+
+[[https://github.com/AnthonyCalandra/modern-cpp-features/blob/master/CPP11.md][C++11]]
+
+[[https://github.com/AnthonyCalandra/modern-cpp-features/blob/master/CPP14.md][C++14]]
+
+[[https://github.com/AnthonyCalandra/modern-cpp-features/blob/master/CPP17.md][C++17]]
+
+* Template/Meta-programming
+
+A very powerful programming technique. The follow examples explain how to use on functions and classes 
+
 ** Functions
 - Arguments Deduction [[https://github.com/NelsonBilber/cpp.templates.functions.1.arguments.deduction][Source Code]]
 - Explicit Specialization [[https://github.com/NelsonBilber/cpp.templates.functions.2.explicit.specialization][Source Code]]
@@ -29,16 +34,42 @@
 ** Classes
 - Basics [[https://github.com/NelsonBilber/cpp.templates.class1.basic][Source Code]]
 - Explicit Specialization [[https://github.com/NelsonBilber/cpp.templates.class1.basic][Source Code]]
-- Partical Specialization [[https://github.com/NelsonBilber/cpp.templates.class3.partial.specialization][Source Code]]
+- Partial Specialization [[https://github.com/NelsonBilber/cpp.templates.class3.partial.specialization][Source Code]]
 - Alias [[https://github.com/NelsonBilber/cpp.templates.class4.typealias][Source Code]]
 * Functional Programming
+
+This is a very wide topic, It's a programming paradigm. With modern C++ has gain attention again.  
+Next link presents "just a simple" example how can be used in C++.
+
 [[https://github.com/NelsonBilber/cpp.functional.programming][Source Code]]
+
+* Libraries
+- [[https://www.qt.io/][Qt - C++ Gui Framework]]
+- [[https://www.boost.org/][Boost - Generic C++ library]]
 * Courses
 ** Learn Advanced C++ Programming Course
 [[https://github.com/NelsonBilber/cpp.udemy.advancedcpp][Source Code]]
 * Books
-** Modern C++ Design: Generic Programming and Design Patterns Applied
-[[https://github.com/NelsonBilber/cpp.loki][Loki]]
+
+C++ has a lot of good books for several levels of experience. Check this link  [[https://stackoverflow.com/questions/388242/the-definitive-c-book-guide-and-list][The Definitive C++ Book Guide and List]]
+Personally recommend:
+
+- The C++ Programming Language
+- Effective Modern C++: 42 Specific Ways to Improve Your Use of C++11 and C++14 
+- Modern C++ Design: Generic Programming and Design Patterns Applied [[https://github.com/NelsonBilber/cpp.loki][Loki]]
+
 * Links
+** Blogs
+
+[[https://isocpp.org/blog/rss][ISO C++ Blog]]
+
+[[https://blogs.msdn.microsoft.com/vcblog/][Visual C++ team Blog]]
+
+[[https://arne-mertz.de/][Simplify C++]]
+
+[[https://blog.feabhas.com/][Sticky Bits]]
+
+[[https://www.fluentcpp.com/][Fluent C++]]
+
 ** Cpp Code Guidelines
 [[https://github.com/isocpp/CppCoreGuidelines][Link]]
