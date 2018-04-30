@@ -53,10 +53,9 @@ Concepts/ideas:
 - Models/Architectures: One writer and multiple readers, ....
 
 The follow example uses Qt polemic thread management to describe a [[https://github.com/NelsonBilber/Qt/tree/master/WorkerQueue][Worker Queue]]  
-
 * Stack of Development 
 
-It's important to establish a pipeline for development, C++ has plenty of tool to deal with this process.
+It's important to establish a pipeline for development, C++ has plenty of tools to deal with this process.
 These are my weapons of choice:
 
 - Project organization: [[https://cmake.org/][Cmake]]
