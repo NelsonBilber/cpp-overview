@@ -41,6 +41,29 @@ Next link presents "just a simple" example how can be used in C++.
 
 [[https://github.com/NelsonBilber/cpp.functional.programming][Source Code]]
 
+* Multi-threading
+
+Modern C++ incorporates new functions/options to deal native with threads
+Also lots of important topics to talk about this topic:
+- Thread management: Threads, locks, dead locks, ...
+- Communication between threads: Conditions variables, features, ...
+- Atomic Operations, Lock free data structures, ...
+- Models/Architectures: One writer and multiple readers, ....
+
+The follow example uses Qt polemic thread management to describe a [[https://github.com/NelsonBilber/Qt/tree/master/WorkerQueue][Worker Queue]]  
+
+* Stack of Development 
+
+It's important to establish a pipeline for development, C++ has plenty of tool to deal with this process.
+These are my weapons of choice:
+
+- Project organization: [[https://cmake.org/][Cmake]]
+- IDE: Emacs, Qt Creator
+- Unit Test (TDD, BDD): [[https://github.com/catchorg/Catch2][Catch2]] or [[https://github.com/google/googletest][Google Test]]
+- Fuzz Testing: [[https://llvm.org/docs/LibFuzzer.html][libFuzzer]]
+- Continuous Integration: [[https://docs.travis-ci.com/user/languages/cpp/][Travis CI]]   
+- Static Analysis: [[http://cppcheck.sourceforge.net/][Cpp Check]]
+
 * Libraries
 - [[https://www.qt.io/][Qt - C++ Gui Framework]]
 - [[https://www.boost.org/][Boost - Generic C++ library]]
