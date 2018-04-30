@@ -43,8 +43,10 @@ Next link presents "just a simple" example how can be used in C++.
 
 * Multi-threading
 
-Modern C++ incorporates new functions/options to deal native with threads
-Also lots of important topics to talk about this topic:
+Modern C++ adds new functions/options to deal with threads independent of Operating System. Lots of ideas we could talk about this topic, it's very important to know some techniques using threads. A simple network program with a GUI that is constantly listen for data, couldn't work properly without threads
+
+Concepts/ideas:
+
 - Thread management: Threads, locks, dead locks, ...
 - Communication between threads: Conditions variables, features, ...
 - Atomic Operations, Lock free data structures, ...
@@ -63,6 +65,8 @@ These are my weapons of choice:
 - Fuzz Testing: [[https://llvm.org/docs/LibFuzzer.html][libFuzzer]]
 - Continuous Integration: [[https://docs.travis-ci.com/user/languages/cpp/][Travis CI]]   
 - Static Analysis: [[http://cppcheck.sourceforge.net/][Cpp Check]]
+
+Follow this WIP [[https://github.com/NelsonBilber/algorithms][Algorithms]]
 
 * Libraries
 - [[https://www.qt.io/][Qt - C++ Gui Framework]]
