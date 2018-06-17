@@ -10,11 +10,13 @@ Some notes about C++ programming language ( source code, libraries, books, blogs
 - Smart pointers [[https://github.com/NelsonBilber/cpp.smartpointers][Source Code]]
 - STL [[https://github.com/NelsonBilber/cpp.stl][Source Code]]
 - Object Oriented Programming [[https://github.com/NelsonBilber/cpp.oop][Source Code]]
+- The rule of three/five/zero [[https://github.com/NelsonBilber/cpp.movesemantics][Source Code]]
 * Modern C++
 - Lambdas [[https://github.com/NelsonBilber/cpp.lambdas][Source Code]]
 - Concepts [[https://github.com/NelsonBilber/cpp.lambdas][Source Code]]
 - Monads [[https://github.com/NelsonBilber/cpp.monads][Source Code]]
 - Variadic Templates [[https://github.com/NelsonBilber/cpp.variadic.templates][Source Code]]
+- Move semantics [[https://github.com/NelsonBilber/cpp.movesemantics][Source Code]]
 
 [[https://github.com/AnthonyCalandra/modern-cpp-features/blob/master/CPP11.md][C++11]] 
 [[https://github.com/AnthonyCalandra/modern-cpp-features/blob/master/CPP14.md][C++14]]
