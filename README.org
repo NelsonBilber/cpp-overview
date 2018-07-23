@@ -55,6 +55,11 @@ Concepts/ideas:
 - Models/Architectures: One writer and multiple readers, ....
 
 The follow example uses Qt polemic thread management to describe a [[https://github.com/NelsonBilber/Qt/tree/master/WorkerQueue][Worker Queue]]  
+
+* Unit Tests
+
+Check this small project using Google-Test  [[https://github.com/NelsonBilber/cpp.unittests][C++ Unit Tests]]  
+
 * Stack of Development 
 
 It's important to establish a pipeline for development, C++ has plenty of tools to deal with this process.
