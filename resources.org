@@ -1,0 +1,19 @@
+#+TITLE: C++ Notes
+#+AUTHOR: Nelson Rodrigues
+
+
+* Links
+** Blogs
+
+[[https://isocpp.org/blog/rss][ISO C++ Blog]]
+
+[[https://blogs.msdn.microsoft.com/vcblog/][Visual C++ team Blog]]
+
+[[https://arne-mertz.de/][Simplify C++]]
+
+[[https://blog.feabhas.com/][Sticky Bits]]
+
+[[https://www.fluentcpp.com/][Fluent C++]]
+
+** Cpp Code Guidelines
+[[https://github.com/isocpp/CppCoreGuidelines][Link]]

@@ -1,0 +1,18 @@
+#+TITLE: C++ Notes
+#+AUTHOR: Nelson Rodrigues
+
+
+* Template/Meta-programming
+
+A very powerful programming technique. The follow examples explain how to use on functions and classes 
+
+** Functions
+- Arguments Deduction [[https://github.com/NelsonBilber/cpp.templates.functions.1.arguments.deduction][Source Code]]
+- Explicit Specialization [[https://github.com/NelsonBilber/cpp.templates.functions.2.explicit.specialization][Source Code]]
+- Non-Type Arguments [[https://github.com/NelsonBilber/cpp.templates.functions.3.non-type.arguments][Source Code]]
+- Variadic Templates [[https://github.com/NelsonBilber/cpp.templates.functions.4.variadic.templates][Source Code]]
+** Classes
+- Basics [[https://github.com/NelsonBilber/cpp.templates.class1.basic][Source Code]]
+- Explicit Specialization [[https://github.com/NelsonBilber/cpp.templates.class1.basic][Source Code]]
+- Partial Specialization [[https://github.com/NelsonBilber/cpp.templates.class3.partial.specialization][Source Code]]
+- Alias [[https://github.com/NelsonBilber/cpp.templates.class4.typealias][Source Code]]

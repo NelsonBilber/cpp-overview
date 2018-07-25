@@ -1,0 +1,13 @@
+#+TITLE: C++ Notes
+#+AUTHOR: Nelson Rodrigues
+
+
+* Books
+
+C++ has a lot of good books for several levels of experience. Check this link  [[https://stackoverflow.com/questions/388242/the-definitive-c-book-guide-and-list][The Definitive C++ Book Guide and List]]
+
+Personally recommend:
+
+- The C++ Programming Language
+- Effective Modern C++: 42 Specific Ways to Improve Your Use of C++11 and C++14 
+- Modern C++ Design: Generic Programming and Design Patterns Applied [[https://github.com/NelsonBilber/cpp.loki][Loki]]

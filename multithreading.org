@@ -1,0 +1,15 @@
+#+TITLE: C++ Notes
+#+AUTHOR: Nelson Rodrigues
+
+* Multi-threading
+
+Modern C++ adds new functions/options to deal with threads independent of Operating System. Lots of ideas we could talk about this topic, it's very important to know some techniques using threads. A simple network program with a GUI that is constantly listen for data, couldn't work properly without threads
+
+Concepts/ideas:
+
+- Thread management: Threads, locks, dead locks, ...
+- Communication between threads: Conditions variables, features, ...
+- Atomic Operations, Lock free data structures, ...
+- Models/Architectures: One writer and multiple readers, ....
+
+The follow example uses Qt polemic thread management to describe a [[https://github.com/NelsonBilber/Qt/tree/master/WorkerQueue][Worker Queue]]  

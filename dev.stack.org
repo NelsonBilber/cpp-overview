@@ -1,0 +1,17 @@
+#+TITLE: C++ Notes
+#+AUTHOR: Nelson Rodrigues
+
+
+* Stack of Development 
+
+It's important to establish a pipeline for development, C++ has plenty of tools to deal with this process.
+These are my weapons of choice:
+
+- Project organization: [[https://cmake.org/][Cmake]]
+- IDE: Emacs, Qt Creator
+- Unit Test (TDD, BDD): [[https://github.com/catchorg/Catch2][Catch2]] or [[https://github.com/google/googletest][Google Test]]
+- Fuzz Testing: [[https://llvm.org/docs/LibFuzzer.html][libFuzzer]]
+- Continuous Integration: [[https://docs.travis-ci.com/user/languages/cpp/][Travis CI]]   
+- Static Analysis: [[http://cppcheck.sourceforge.net/][Cpp Check]]
+
+Follow this WIP [[https://github.com/NelsonBilber/algorithms][Algorithms]]

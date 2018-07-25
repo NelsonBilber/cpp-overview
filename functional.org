@@ -1,0 +1,10 @@
+#+TITLE: C++ Notes
+#+AUTHOR: Nelson Rodrigues
+
+
+* Functional Programming
+
+This is a very wide topic, It's a programming paradigm. With modern C++ has gain attention again.  
+Next link presents "just a simple" example how can be used in C++.
+
+[[https://github.com/NelsonBilber/cpp.functional.programming][Source Code]]

@@ -3,105 +3,25 @@
 
 Some notes about C++ programming language ( source code, libraries, books, blogs, ....)
 
-* Basics
-- RAII [[https://github.com/NelsonBilber/cpp.RAII][Source Code]]
-- Containers [[https://github.com/NelsonBilber/cpp.containers][Source Code]]
-- Cast [[https://github.com/NelsonBilber/cpp.cast][Source Code]]
-- Smart pointers [[https://github.com/NelsonBilber/cpp.smartpointers][Source Code]]
-- STL [[https://github.com/NelsonBilber/cpp.stl][Source Code]]
-- Object Oriented Programming [[https://github.com/NelsonBilber/cpp.oop][Source Code]]
-- The rule of three/five/zero [[https://github.com/NelsonBilber/cpp.movesemantics][Source Code]]
-* Modern C++
-- Lambdas [[https://github.com/NelsonBilber/cpp.lambdas][Source Code]]
-- Concepts [[https://github.com/NelsonBilber/cpp.lambdas][Source Code]]
-- Monads [[https://github.com/NelsonBilber/cpp.monads][Source Code]]
-- Variadic Templates [[https://github.com/NelsonBilber/cpp.variadic.templates][Source Code]]
-- Move semantics [[https://github.com/NelsonBilber/cpp.movesemantics][Source Code]]
+[[file:basics.org][Basics Concepts]]
 
-[[https://github.com/AnthonyCalandra/modern-cpp-features/blob/master/CPP11.md][C++11]] 
-[[https://github.com/AnthonyCalandra/modern-cpp-features/blob/master/CPP14.md][C++14]]
-[[https://github.com/AnthonyCalandra/modern-cpp-features/blob/master/CPP17.md][C++17]]
+[[file:modern.org][Modern C++]]
 
-* Template/Meta-programming
+[[file:metaprogramming.org][Template/Metaprogramming]]
 
-A very powerful programming technique. The follow examples explain how to use on functions and classes 
+[[file:functional.org][Functional Programming]]
 
-** Functions
-- Arguments Deduction [[https://github.com/NelsonBilber/cpp.templates.functions.1.arguments.deduction][Source Code]]
-- Explicit Specialization [[https://github.com/NelsonBilber/cpp.templates.functions.2.explicit.specialization][Source Code]]
-- Non-Type Arguments [[https://github.com/NelsonBilber/cpp.templates.functions.3.non-type.arguments][Source Code]]
-- Variadic Templates [[https://github.com/NelsonBilber/cpp.templates.functions.4.variadic.templates][Source Code]]
-** Classes
-- Basics [[https://github.com/NelsonBilber/cpp.templates.class1.basic][Source Code]]
-- Explicit Specialization [[https://github.com/NelsonBilber/cpp.templates.class1.basic][Source Code]]
-- Partial Specialization [[https://github.com/NelsonBilber/cpp.templates.class3.partial.specialization][Source Code]]
-- Alias [[https://github.com/NelsonBilber/cpp.templates.class4.typealias][Source Code]]
-* Functional Programming
+[[file:multithreading.org][Multithreading]]
 
-This is a very wide topic, It's a programming paradigm. With modern C++ has gain attention again.  
-Next link presents "just a simple" example how can be used in C++.
+[[file:unit.tests.org][Unit Tests]]
 
-[[https://github.com/NelsonBilber/cpp.functional.programming][Source Code]]
+[[file:dev.stack.org][Stack Of Developement]]
 
-* Multi-threading
+[[file:libs.org][Libraries]]
 
-Modern C++ adds new functions/options to deal with threads independent of Operating System. Lots of ideas we could talk about this topic, it's very important to know some techniques using threads. A simple network program with a GUI that is constantly listen for data, couldn't work properly without threads
+[[file:courses.org][Courses]]
 
-Concepts/ideas:
+[[file:books.org][Books]]
 
-- Thread management: Threads, locks, dead locks, ...
-- Communication between threads: Conditions variables, features, ...
-- Atomic Operations, Lock free data structures, ...
-- Models/Architectures: One writer and multiple readers, ....
+[[file:resources.org][Resources]]
 
-The follow example uses Qt polemic thread management to describe a [[https://github.com/NelsonBilber/Qt/tree/master/WorkerQueue][Worker Queue]]  
-
-* Unit Tests
-
-Check this small project using Google-Test  [[https://github.com/NelsonBilber/cpp.unittests][C++ Unit Tests]]  
-
-* Stack of Development 
-
-It's important to establish a pipeline for development, C++ has plenty of tools to deal with this process.
-These are my weapons of choice:
-
-- Project organization: [[https://cmake.org/][Cmake]]
-- IDE: Emacs, Qt Creator
-- Unit Test (TDD, BDD): [[https://github.com/catchorg/Catch2][Catch2]] or [[https://github.com/google/googletest][Google Test]]
-- Fuzz Testing: [[https://llvm.org/docs/LibFuzzer.html][libFuzzer]]
-- Continuous Integration: [[https://docs.travis-ci.com/user/languages/cpp/][Travis CI]]   
-- Static Analysis: [[http://cppcheck.sourceforge.net/][Cpp Check]]
-
-Follow this WIP [[https://github.com/NelsonBilber/algorithms][Algorithms]]
-
-* Libraries
-- [[https://www.qt.io/][Qt - C++ Gui Framework]]
-- [[https://www.boost.org/][Boost - Generic C++ library]]
-* Courses
-** Learn Advanced C++ Programming Course
-[[https://github.com/NelsonBilber/cpp.udemy.advancedcpp][Source Code]]
-* Books
-
-C++ has a lot of good books for several levels of experience. Check this link  [[https://stackoverflow.com/questions/388242/the-definitive-c-book-guide-and-list][The Definitive C++ Book Guide and List]]
-
-Personally recommend:
-
-- The C++ Programming Language
-- Effective Modern C++: 42 Specific Ways to Improve Your Use of C++11 and C++14 
-- Modern C++ Design: Generic Programming and Design Patterns Applied [[https://github.com/NelsonBilber/cpp.loki][Loki]]
-
-* Links
-** Blogs
-
-[[https://isocpp.org/blog/rss][ISO C++ Blog]]
-
-[[https://blogs.msdn.microsoft.com/vcblog/][Visual C++ team Blog]]
-
-[[https://arne-mertz.de/][Simplify C++]]
-
-[[https://blog.feabhas.com/][Sticky Bits]]
-
-[[https://www.fluentcpp.com/][Fluent C++]]
-
-** Cpp Code Guidelines
-[[https://github.com/isocpp/CppCoreGuidelines][Link]]

@@ -1,0 +1,11 @@
+#+TITLE: C++ Notes
+#+AUTHOR: Nelson Rodrigues
+
+* Basics
+- RAII [[https://github.com/NelsonBilber/cpp.RAII][Source Code]]
+- Containers [[https://github.com/NelsonBilber/cpp.containers][Source Code]]
+- Cast [[https://github.com/NelsonBilber/cpp.cast][Source Code]]
+- Smart pointers [[https://github.com/NelsonBilber/cpp.smartpointers][Source Code]]
+- STL [[https://github.com/NelsonBilber/cpp.stl][Source Code]]
+- Object Oriented Programming [[https://github.com/NelsonBilber/cpp.oop][Source Code]]
+- The rule of three/five/zero [[https://github.com/NelsonBilber/cpp.movesemantics][Source Code]]

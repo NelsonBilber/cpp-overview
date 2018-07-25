@@ -1,0 +1,7 @@
+#+TITLE: C++ Notes
+#+AUTHOR: Nelson Rodrigues
+
+
+* Libraries
+- [[https://www.qt.io/][Qt - C++ Gui Framework]]
+- [[https://www.boost.org/][Boost - Generic C++ library]]
