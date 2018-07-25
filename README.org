@@ -1,11 +1,6 @@
 #+TITLE: C++ Notes
 #+AUTHOR: Nelson Rodrigues
 
-Some notes about C++ programming language ( source code, libraries, books, blogs, ....)
-
-
-
-
 
 
 | Topic                                                  | Description                                                                                  |
