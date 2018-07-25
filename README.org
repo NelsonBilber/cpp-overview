@@ -5,7 +5,7 @@ Some notes about C++ programming language ( source code, libraries, books, blogs
 
 [[file:basics.org][Basics Concepts]]
 
-[[file:modern.org][Modern C++]]
+[[file:moderncpp.org][Modern C++]]
 
 [[file:metaprogramming.org][Template/Metaprogramming]]
 
