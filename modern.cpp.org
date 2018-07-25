@@ -1,0 +1,14 @@
+#+TITLE: C++ Notes
+#+AUTHOR: Nelson Rodrigues
+
+* Modern C++
+- Lambdas [[https://github.com/NelsonBilber/cpp.lambdas][Source Code]]
+- Concepts [[https://github.com/NelsonBilber/cpp.lambdas][Source Code]]
+- Monads [[https://github.com/NelsonBilber/cpp.monads][Source Code]]
+- Variadic Templates [[https://github.com/NelsonBilber/cpp.variadic.templates][Source Code]]
+- Move semantics [[https://github.com/NelsonBilber/cpp.movesemantics][Source Code]]
+
+[[https://github.com/AnthonyCalandra/modern-cpp-features/blob/master/CPP11.md][C++11]] 
+[[https://github.com/AnthonyCalandra/modern-cpp-features/blob/master/CPP14.md][C++14]]
+[[https://github.com/AnthonyCalandra/modern-cpp-features/blob/master/CPP17.md][C++17]]
+
