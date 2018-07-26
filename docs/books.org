@@ -1,8 +1,6 @@
-#+TITLE: C++ Notes
+#+TITLE: C++ Books
 #+AUTHOR: Nelson Rodrigues
 
-
-* Books
 
 C++ has a lot of good books for several levels of experience. Check this link  [[https://stackoverflow.com/questions/388242/the-definitive-c-book-guide-and-list][The Definitive C++ Book Guide and List]]
 
