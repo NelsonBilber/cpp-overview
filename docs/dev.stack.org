@@ -14,7 +14,9 @@ These are my weapons of choice:
 - Continuous Integration: [[https://docs.travis-ci.com/user/languages/cpp/][Travis CI]]   
 - Static Analysis: [[http://cppcheck.sourceforge.net/][Cpp Check]]
 
-Follow /Work In Progress/ [[https://github.com/NelsonBilber/algorithms][Algorithms]] I'm trying to apply these concepts.
+*** Use cases
+
+Follow /Work In Progress (WIP) / [[https://github.com/NelsonBilber/algorithms][Algorithms]] I'm trying to apply these concepts.
 
 On other project [[https://github.com/NelsonBilber/cpp.unittests][C++ Unit Tests]] I have used Google-Tests for TDD and Travis for Continuous Integration
 
