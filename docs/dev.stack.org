@@ -1,4 +1,4 @@
-#+TITLE: C++ Notes
+#+TITLE: C++ Stack Developement
 #+AUTHOR: Nelson Rodrigues
 
 
