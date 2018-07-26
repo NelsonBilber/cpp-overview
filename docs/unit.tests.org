@@ -1,8 +1,6 @@
-#+TITLE: C++ Notes
+#+TITLE: C++ Unit Tests
 #+AUTHOR: Nelson Rodrigues
 
-
-* Unit Tests
 
 Check this small project using Google-Test
 
