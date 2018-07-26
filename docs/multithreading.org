@@ -1,7 +1,6 @@
-#+TITLE: C++ Notes
+#+TITLE: C++ Multi-threading
 #+AUTHOR: Nelson Rodrigues
 
-* Multi-threading
 
 Modern C++ adds new functions/options to deal with threads independent of Operating System. Lots of ideas we could talk about this topic, it's very important to know some techniques using threads. A simple network program with a GUI that is constantly listen for data, couldn't work properly without threads
 
