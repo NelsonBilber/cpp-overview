@@ -1,7 +1,6 @@
-#+TITLE: C++ Notes
+#+TITLE: C++ Basics concepts
 #+AUTHOR: Nelson Rodrigues
 
-* Basics
 - RAII [[https://github.com/NelsonBilber/cpp.RAII][Source Code]]
 - Containers [[https://github.com/NelsonBilber/cpp.containers][Source Code]]
 - Cast [[https://github.com/NelsonBilber/cpp.cast][Source Code]]
