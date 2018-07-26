@@ -2,8 +2,6 @@
 #+AUTHOR: Nelson Rodrigues
 
 
-* Stack of Development 
-
 It's important to establish a pipeline for development, C++ has plenty of tools to deal with this process.
 These are my weapons of choice:
 
