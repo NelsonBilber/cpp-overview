@@ -1,9 +1,10 @@
-#+TITLE: C++ Notes
+#+TITLE: C++ Resources
 #+AUTHOR: Nelson Rodrigues
 
 
-* Links
-** Blogs
+** Links
+
+*** Blogs
 
 [[https://isocpp.org/blog/rss][ISO C++ Blog]]
 
@@ -15,9 +16,9 @@
 
 [[https://www.fluentcpp.com/][Fluent C++]]
 	
-** Podcast
+*** Podcast
 
 [[http://cppcast.com/][Cpp Cast]]
 
-** Cpp Code Guidelines
+*** Cpp Code Guidelines
 [[https://github.com/isocpp/CppCoreGuidelines][Link]]
