@@ -1,8 +1,7 @@
-#+TITLE: C++ Notes
+#+TITLE: C++ Template/Meta-programming
 #+AUTHOR: Nelson Rodrigues
 
-
-* Template/Meta-programming
+ 
 
 A very powerful programming technique. The follow examples explain how to use on functions and classes 
 
