@@ -2,6 +2,10 @@
 #+AUTHOR: Nelson Rodrigues
 
 
+This repository collects topics about C++ programming language. The propose is to explore this programming language, basic concepts ( RAII, Rule of 3 and 5, ) and more complex ideas ( Lambdas, move semantics, variadic templates, ... )
+
+Also checkout my [[ https:://nelsonbilber.github.io][homepage]] for an alternative index and explore other technical programming topics. 
+
 
 | Topic                    | Description                                                                                  |
 |--------------------------+----------------------------------------------------------------------------------------------|
