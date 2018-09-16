@@ -5,8 +5,7 @@
 #+CAPTION: C++ ISO Logo
 #+NAME:   C++ ISO logo
 #+ATTR_HTML: :width 50% :height 50% 
-[[./imgs/cpp_logo.png
-]]
+[[./imgs/cpp_logo.png]]
 
 
 This repository collects source code about multiple topics about C++ programming language. The propose is to explore basic concepts ( RAII, Rule of 3 and 5 ) and more complex ideas ( Lambdas, move semantics, variadic templates, ... ).
@@ -32,6 +31,6 @@ Checkout my [[https://nelsonbilber.github.io][homepage]] for an alternative inde
 |----------------------------------+----------------------------------------------------------------------------------------------|
 
 
-**** Copyrights
+**** Logo Copyrights
 
 [[https://github.com/isocpp/logos][C++ Standard Foundation]]	
