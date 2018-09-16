@@ -8,9 +8,7 @@
 - Variadic Templates [[https://github.com/NelsonBilber/cpp.variadic.templates][Source Code]]
 - Move semantics [[https://github.com/NelsonBilber/cpp.movesemantics][Source Code]]
 
-[[https://github.com/AnthonyCalandra/modern-cpp-features/blob/master/CPP11.md][C++11]] 
+** Features by standard
 
-[[https://github.com/AnthonyCalandra/modern-cpp-features/blob/master/CPP14.md][C++14]]
-
-[[https://github.com/AnthonyCalandra/modern-cpp-features/blob/master/CPP17.md][C++17]]
+[[https://github.com/AnthonyCalandra/modern-cpp-features/blob/master/CPP11.md][C++11]] [[https://github.com/AnthonyCalandra/modern-cpp-features/blob/master/CPP14.md][C++14]] [[https://github.com/AnthonyCalandra/modern-cpp-features/blob/master/CPP17.md][C++17]]
 
