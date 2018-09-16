@@ -4,7 +4,9 @@
 
 #+CAPTION: C++ ISO Logo
 #+NAME:   C++ ISO logo
-#+ATTR_HTML: :width 50% :height 50% 
+#+ATTR_HTML: width="100px"
+#+ATTR_ORG: :width 100
+#+ATTR_HTML: :style margin-left: auto; margin-right: auto;
 [[./imgs/cpp_logo.png]]
 
 
@@ -15,20 +17,21 @@ Also presents useful resources for implement a workflow for a stack of developme
 Checkout my [[https://nelsonbilber.github.io][homepage]] for an alternative index and explore other technical programming topics. 
 
 
-| Topic                            | Description                                                                                  |
-|----------------------------------+----------------------------------------------------------------------------------------------|
-| [[file:./docs/basics.org][Basics Concepts]]                  | RAII, Containers, Rule of Three, Five and Zero                                               |
-| [[file:./docs/modern.cpp.org][Modern C++ (C++11/C++14/C++17)]]   | Lambdas, Concepts, Move semantics, Monads                                                    |
-| [[file:./docs/metaprogramming.org][Template/Metaprogramming]]         | Argument Type Deduction, Explicit Specialization, Variadic Templates, Partial Specialization |
-| [[file:./docs/functional.org][Functional Programming]]           | Small example how to use std <functional>                                                    |
-| [[file:./docs/multithreading.org][Multithreading]]                   | Small example how to use a "Working Queue Model" with Qt                                     |
-| [[file:./docs/unit.tests.org][Unit Tests]]                       | How to use Google-tests for unit testing (TDD)                                               |
-| [[file:./docs/dev.stack.org][Stack Of Developement]]            | Recommendations for libs and tricks during all development cycles                            |
-| [[file:./docs/libs.org][Libraries]]                        | Popular C++ libs                                                                             |
-| [[file:./docs/courses.org][Courses]]                          | Web courses to polish C++ code skills                                                        |
-| [[file:./docs/books.org][Books]]                            | Recomended books that covers basic and advanced concepts and best practices                  |
-| [[file:./docs/resources.org][Resources]]                        | Links, blogs, podcast, ...                                                                   |
-|----------------------------------+----------------------------------------------------------------------------------------------|
+| Topic                    | Description                                                                                  |
+|--------------------------+----------------------------------------------------------------------------------------------|
+| [[file:./docs/basics.org][Basics Concepts]]          | RAII, Containers, Rule of Three, Five and Zero                                               |
+| [[file:./docs/modern.cpp.org][Modern C++ (v11/v14/v17)]] | Lambdas, Concepts, Move semantics, Monads                                                    |
+| [[file:./docs/metaprogramming.org][Template/Metaprogramming]] | Argument Type Deduction, Explicit Specialization, Variadic Templates, Partial Specialization |
+| [[file:./docs/functional.org][Functional Programming]]   | Small example how to use std <functional>                                                    |
+| [[file:./docs/multithreading.org][Multithreading]]           | Small example how to use a "Working Queue Model" with Qt                                     |
+| [[file:./docs/unit.tests.org][Unit Tests]]               | How to use Google-tests for unit testing (TDD)                                               |
+| [[file:./docs/dev.stack.org][Stack Of Developement]]    | Recommendations for libs and tricks during all development cycles                            |
+| [[file:./docs/libs.org][Libraries]]                | Popular C++ libs                                                                             |
+| [[file:./docs/courses.org][Courses]]                  | Web courses to polish C++ code skills                                                        |
+| [[file:./docs/books.org][Books]]                    | Recomended books that covers basic and advanced concepts and best practices                  |
+| [[file:./docs/resources.org][Resources]]                | Links, blogs, podcast, ...                                                                   |
+|--------------------------+----------------------------------------------------------------------------------------------|
+
 
 
 **** Logo Copyrights
