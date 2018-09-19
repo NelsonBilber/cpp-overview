@@ -1,13 +1,13 @@
 #+TITLE: C++ Functional Programming
 #+AUTHOR: Nelson Rodrigues
-
+#+TOC: headlines 5
 
 This is a very wide topic, It's a programming paradigm. With modern C++ has gain attention again.  
 Next link presents "just a simple" example how can be used in C++.
 
 ** Higher Order Functions
 
-#+BEGIN_EXAMPLE C++
+#+BEGIN_SRC C++
 
 /* c++ Higher order functions
 
@@ -72,12 +72,12 @@ int main()
 }
 
 
-#+END_EXAMPLE
+#+END_SRC
 
 
 ** std::invoke
 
-#+BEGIN_EXAMPLE 
+#+BEGIN_SRC C++ 
 
 /*  C++ 17 std::invoke
 
@@ -132,11 +132,11 @@ int main()
 	return 0;
 }
 
-#+END_EXAMPLE
+#+END_SRC
 
 ** std::functional
 
-#+BEGIN_EXAMPLE
+#+BEGIN_SRC C++
 
 /*  C++ 17 std::function
 
@@ -185,7 +185,8 @@ int main()
 	return 0;
 }
 
-#+END_EXAMPLE
+#+END_SRC
 
 ** Other Examples
+
 [[https://github.com/NelsonBilber/cpp.functional.programming][Source Code]]

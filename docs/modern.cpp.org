@@ -1,16 +1,16 @@
 #+TITLE: C++ Modern C++
 #+AUTHOR: Nelson Rodrigues
-
+#+Toc: headlines 5
 
 
 *** C++17
 
-***** C++ 17 New rules for initalization Lists
+**** C++ 17 New rules for initalization Lists
 
 Example 01
 
 
-#+BEGIN_EXAMPLE C++
+#+BEGIN_SRC C++
 
 //C++ Initalization types
 /*
@@ -52,12 +52,12 @@ https://www.bfilipek.com/2017/01/cpp17features.html#new-auto-rules-for-direct-li
 
 */
 
-#+END_EXAMPLE
+#+END_SRC
 
 
 Example 02
 
-#+BEGIN_EXAMPLE C++
+#+BEGIN_SRC C++
 
 /* C++ std::initializer_list<T>
 
@@ -131,9 +131,9 @@ int main()
 	return 0;
 }
 
-#+END_EXAMPLE
+#+END_SRC
 
-***** Inline variables
+**** Inline variables
 
 #+BEGIN_EXAMPLE C++
 
@@ -165,7 +165,7 @@ int main()
 
 #+END_EXAMPLE
 
-***** Anonymous namespaces
+**** Anonymous namespaces
 
 #+BEGIN_EXAMPLE C++
 /*  Unnamed/anonymous namespaces vs. static functions
@@ -246,7 +246,7 @@ int x = DEFAULT_ID:
 
 #+END_EXAMPLE
 
-***** Nested namespaces
+**** Nested namespaces
 
 #+BEGIN_EXAMPLE C++
 
@@ -279,7 +279,7 @@ namespace Core::Graphics::Rendering {
 
 #+END_EXAMPLE
 
-***** Template deduction
+**** Template deduction
 
 #+BEGIN_EXAMPLE C++
 
@@ -324,7 +324,7 @@ http://www.open-std.org/jtc1/sc22/wg21/docs/papers/2016/p0091r3.html
 
 #+END_EXAMPLE
 
-***** initalizer if-statement
+**** initalizer if-statement
 
 #+BEGIN_EXAMPLE C++
 
@@ -371,7 +371,7 @@ int main()
 
 #+END_EXAMPLE
 
-***** Structure unbinding 
+**** Structure unbinding 
 
 #+BEGIN_EXAMPLE C++
 
@@ -447,7 +447,7 @@ int main()
 
 #+END_EXAMPLE
 
-***** string_view
+**** string_view
 
 #+BEGIN_EXAMPLE C++
 
@@ -532,7 +532,7 @@ int main()
 
 #+END_EXAMPLE
 
-***** FileSystem
+**** FileSystem
 
 #+BEGIN_EXAMPLE
 /*  C++ 17 FileSystem
@@ -578,11 +578,12 @@ int main()
 
 #+END_EXAMPLE
 
+
 *** Lambdas 
 
 [[https://github.com/NelsonBilber/cpp.lambdas][Source Code]]
 
-***** lambda recursive
+**** lambda recursive
 
 #+BEGIN_EXAMPLE C++
 /*  C++ Recursive lambdas
@@ -678,7 +679,7 @@ int main()
 
 #+END_EXAMPLE
 
-***** lambda capture *this (C++17)
+**** lambda capture *this (C++17)
 
 #+BEGIN_EXAMPLE C++
 
@@ -771,7 +772,7 @@ int main()
 
 #+END_EXAMPLE
 
-***** using lambdas as callbacks
+**** using lambdas as callbacks
 
 #+BEGIN_EXAMPLE C++
 
@@ -958,12 +959,14 @@ int main()
 
 
 *** Concepts
-[[https://github.com/NelsonBilber/cpp.lambdas][
-Source Code]]
+
+[[https://github.com/NelsonBilber/cpp.lambdas][Source Code]]
+
 
 *** Monads 
 
 [[https://github.com/NelsonBilber/cpp.monads][Source Code]]
+
 
 *** Variadic Templates 
 

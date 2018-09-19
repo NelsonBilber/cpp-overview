@@ -1,5 +1,6 @@
 #+Title: C++ Basics concepts
 #+AUTHOR: Nelson Rodrigues
+#+TOC: headlines 5
 
 ** RAII 
 
@@ -18,7 +19,7 @@
 
 ** STL 
 
-**** std::accumulate
+*** std::accumulate
 
 #+BEGIN_EXAMPLE C++
 
@@ -58,7 +59,7 @@ int main()
 
 #+END_EXAMPLE
 
-**** std::transform
+*** std::transform
 #+BEGIN_EXAMPLE C++
 
 /*  C++ std::transform
@@ -89,7 +90,7 @@ int main()
 
 #+END_EXAMPLE
 
-**** Exceptions
+*** Exceptions
 
 #+BEGIN_EXAMPLE C++
 
@@ -160,7 +161,7 @@ int main()
 
 #+END_EXAMPLE
 
-**** Other examples
+*** Other examples
 
 [[https://github.com/NelsonBilber/cpp.stl][Source Code]]
 
