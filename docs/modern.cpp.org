@@ -2,13 +2,1049 @@
 #+AUTHOR: Nelson Rodrigues
 
 
-- Lambdas [[https://github.com/NelsonBilber/cpp.lambdas][Source Code]]
-- Concepts [[https://github.com/NelsonBilber/cpp.lambdas][Source Code]]
-- Monads [[https://github.com/NelsonBilber/cpp.monads][Source Code]]
-- Variadic Templates [[https://github.com/NelsonBilber/cpp.variadic.templates][Source Code]]
-- Move semantics [[https://github.com/NelsonBilber/cpp.movesemantics][Source Code]]
 
-** Features by standard
+*** C++17
+
+***** C++ 17 New rules for initalization Lists
+
+Example 01
+
+
+#+BEGIN_EXAMPLE C++
+
+//C++ Initalization types
+/*
+
+https://en.cppreference.com/w/cpp/language/initialization
+
+Value initialization, e.g. std::string s{};
+Direct initialization, e.g. std::string s("hello");
+Copy initialization, e.g. std::string s = "hello";
+List initialization, e.g. std::string s{'a', 'b', 'c'};
+Aggregate initialization, e.g. char a[3] = {'a', 'b'};
+Reference initialization, e.g. char& c = a[0];
+
+--------------------------------------------------------------------------------------------
+
+http://www.nuonsoft.com/blog/2017/08/09/c17-direct-vs-copy-list-initialization/
+
+--------------------------------------------------------------------------------------------
+
+
+C++ 17 New rules for initalization Lists
+=========================================
+
+Fixes some cases with auto type deduction. The full background can be found in Auto and braced-init-lists, by Ville Voutilainen.
+
+It fixes the problem of deducing std::initializer_list like:
+
+auto x = foo(); // copy-initialization
+auto x{foo}; // direct-initialization, initializes an initializer_list
+int x = foo(); // copy-initialization
+int x{foo}; // direct-initialization
+And for the direct initialization, new rules are:
+
+For a braced-init-list with only a single element, auto deduction will deduce from that entry;
+For a braced-init-list with more than one element, auto deduction will be ill-formed.
+Basically, auto x { 1 }; will be now deduced as int, but before it was an initializer list.
+
+https://www.bfilipek.com/2017/01/cpp17features.html#new-auto-rules-for-direct-list-initialization
+
+*/
+
+#+END_EXAMPLE
+
+
+Example 02
+
+#+BEGIN_EXAMPLE C++
+
+/* C++ std::initializer_list<T>
+
+https://en.cppreference.com/w/cpp/utility/initializer_list
+std::initializer_list<T>
+An object of type std::initializer_list<T> is a lightweight proxy object that provides access to an array of objects of type const T.
+
+
+benifits of using initalization_list
+https://stackoverflow.com/questions/40818262/benefits-of-stdinitializer-list-in-c11
+
+
+Source code from : https://www.learncpp.com/cpp-tutorial/10-7-stdinitializer_list/
+*/
+
+#include <cassert> // for assert()
+#include <initializer_list> // for std::initializer_list
+#include <iostream>
+ 
+class IntArray
+{
+private:
+	int m_length;
+	int *m_data;
+ 
+public:
+	IntArray() :
+		m_length(0), m_data(nullptr)
+	{
+	}
+ 
+	IntArray(int length) :
+		m_length(length)
+	{
+		m_data = new int[length];
+	}
+ 
+	IntArray(const std::initializer_list<int> &list): // allow IntArray to be initialized via list initialization
+		IntArray(list.size()) // use delegating constructor to set up initial array
+	{
+		// Now initialize our array from the list
+		int count = 0;
+		for (auto &element : list)
+		{
+			m_data[count] = element;
+			++count;
+		}
+	}
+ 
+	~IntArray()
+	{
+		delete[] m_data;
+		// we don't need to set m_data to null or m_length to 0 here, since the object will be destroyed immediately after this function anyway
+	}
+ 
+	int& operator[](int index)
+	{
+		assert(index >= 0 && index < m_length);
+		return m_data[index];
+	}
+ 
+	int getLength() { return m_length; }
+};
+ 
+int main()
+{
+	IntArray array { 5, 4, 3, 2, 1 }; // initializer list
+	for (int count = 0; count < array.getLength(); ++count)
+		std::cout << array[count] << ' ';
+ 
+	return 0;
+}
+
+#+END_EXAMPLE
+
+***** Inline variables
+
+#+BEGIN_EXAMPLE C++
+
+/*  C++ 17 Inline Variables
+
+source code from:
+https://stackoverflow.com/questions/38043442/how-do-inline-variables-work
+
+*/
+
+#include <iostream>
+#include <string>
+
+using namespace std;
+
+struct Kath
+{
+	static std::string const hi;
+	};
+
+inline std::string const Kath::hi = "Zzzzz...";    // Simpler!
+	
+int main()
+{
+	cout << Kath::hi << endl;
+	return 0;
+}
+
+
+#+END_EXAMPLE
+
+***** Anonymous namespaces
+
+#+BEGIN_EXAMPLE C++
+/*  Unnamed/anonymous namespaces vs. static functions
+
+https://stackoverflow.com/questions/154469/unnamed-anonymous-namespaces-vs-static-functions
+
+--------------------------------------------------------------------------------------------------------
+
+Anonymous Namespaces
+
+In C++, there exists another way to declare one or more symbols to have internal linkage: anonymous namespaces. Such a namespace ensures that the symbols declared inside it are visible only within the current translation unit. It is, in essence, just a way to declare many symbols as static. In fact, for a while, the static keyword for the use of declaring a symbol to have internal linkage was deprecated in favor of anonymous namespaces. However, it was recently undeprecated, because it is useful to declare a single variable or function to have internal linkage. There are also a few minor differences which I won’t go into here.
+
+In any case, this:
+
+namespace { int variable = 0; }
+does (almost) the same thing as this:
+
+static int variable = 0;
+
+http://www.goldsborough.me/c/c++/linker/2016/03/30/19-34-25-internal_and_external_linkage_in_c++/
+
+-------------------------------------------------------------------------------------------------------------------
+C++17 might simplify nested namespace definition:
+
+namespace A::B::C {
+}
+is equivalent to
+
+namespace A { namespace B { namespace C {
+} } }
+
+https://stackoverflow.com/questions/11358425/is-there-a-better-way-to-express-nested-namespaces-in-c-within-the-header
+
+*/
+
+#include <iostream>
+ 
+namespace A::B::C {
+class Test{
+public:
+	Test() = default;
+};
+}
+
+
+int main()
+{
+	A::B::C::Test t {};
+	return 0;
+}
+
+
+/* 
+
+How to use a anonymous namespaces to avoid the use of const static int = 42;
+
+on *.hpp file 
+
+namespace TempDefinitions
+{
+	const int32 CONTROLLER_ID_NOT_FOUND = -1;
+}
+
+
+On *.cpp file set up a variable for
+
+namespace
+{
+	const int32 DEFAULT_ID = TempDefinitions::ID_NOT_FOUND;
+}
+
+
+// ...
+
+int x = DEFAULT_ID:
+
+*/
+
+#+END_EXAMPLE
+
+***** Nested namespaces
+
+#+BEGIN_EXAMPLE C++
+
+// Before C++17
+
+namespace Core {
+    namespace Graphics {
+        namespace Rendering {
+ 
+            class PostProcessor
+            {
+            };
+ 
+        }
+    }
+}
+
+// After C++17
+
+namespace Core::Graphics::Rendering {
+ 
+    class PostProcessor
+    {
+    };
+ 
+}
+
+//source from:
+//http://www.nuonsoft.com/blog/2017/08/01/c17-nested-namespaces/
+
+#+END_EXAMPLE
+
+***** Template deduction
+
+#+BEGIN_EXAMPLE C++
+
+/*
+
+" ... What are template deduction guides in C++17?
+Template deduction guides are patterns associated with a template class that tell the compiler how to translate a set of parameter (and their types) into template arguments.
+
+The simplest example is that of std::vector and its constructor that takes an iterator pair.
+
+template<typename Iterator>
+void func(Iterator first, Iterator last)
+{
+  vector v(first, last);
+}
+The compiler needs to figure out what vector<T>’s T type will be. We know what the answer is; T should be typename std::iterator_traits<Iterator>::value_type. But how do we tell the compiler without having to type vector<typename std::iterator_traits<Iterator>::value_type>? ..."
+
+https://isocpp.org/blog/2017/09/quick-q-what-are-template-deduction-guides-in-cpp17
+
+source code from;
+
+Template argument deduction for class templates
+Automatic template argument deduction much like how it's done for functions, but now including class constructors.
+
+template <typename T = float>
+struct MyContainer {
+  T val;
+  MyContainer() : val() {}
+  MyContainer(T val) : val(val) {}
+  // ...
+};
+MyContainer c1{ 1 }; // OK MyContainer<int>
+MyContainer c2; // OK MyContainer<float>
+
+https://github.com/AnthonyCalandra/modern-cpp-features/blob/master/README.md#template-argument-deduction-for-class-templates
+
+
+https://blog.tartanllama.xyz/deduction-for-class-templates/
+http://www.open-std.org/jtc1/sc22/wg21/docs/papers/2016/p0091r3.html
+*/
+
+
+#+END_EXAMPLE
+
+***** initalizer if-statement
+
+#+BEGIN_EXAMPLE C++
+
+/*  C++ initalizer if-statement
+
+It's a good pratice the declarion and the use of varibale shoulbe be the closes as possible
+
+After C++17 we can use initalizer if-statement
+
+\\... 
+
+if (auto r = getGlobalObjectByName(word); !r) r->doSomething;
+The semantics are:
+
+if (init-statement; condition) statement
+The only difference from the "traditional" if-statement is the init-statement, which initializes a variable in the block scope, similar to for-loops.
+
+\\... 
+
+https://stackoverflow.com/questions/45999057/can-i-write-this-if-statement-with-a-variable-declaration-on-one-line
+
+*/
+
+#include <iostream>
+
+using namespace std;
+
+bool IsVisible () { return true; }
+
+int main()
+{
+	if( auto b = IsVisible(); true )
+	{
+		cout << "is visible ... " << b << endl;
+	}
+	else
+	{
+		cout << "is not visible ...  "  << b << endl;
+	}
+
+	return 0;
+}
+
+
+#+END_EXAMPLE
+
+***** Structure unbinding 
+
+#+BEGIN_EXAMPLE C++
+
+// C++17 - Structure unbinding 
+// https://skebanga.github.io/structured-bindings/
+#include <iostream>
+#include <tuple>
+#include <string>
+#include <vector>
+#include <map>
+
+struct MyTuple {
+	int a; 
+	std::string b;
+	double c;
+};
+
+std::map<std::string, int> get_map()
+{
+    return
+	    {
+	        { "hello", 1 },
+        	{ "world", 2 },
+        	{ "it's",  3 },
+        	{ "me",    4 },
+	    };
+}
+
+int main()
+{
+	
+	 auto tuple = std::make_tuple(1,"3",5.23);
+	 int a;
+	 std::string b; 
+	 double c;
+	 
+	 std::tie ( a, b, c ) = tuple;	     
+	 std::cout << a << " - " << b << " - " << c << std::endl;    
+	 
+	 // Same code with C++17 Syntax
+	 
+	 auto [d,e,f] = tuple ;	    
+	 std::cout << d << " - " << e << " - " << f << std::endl;    
+	 
+	 //obtain references
+	 auto& [g,h,j] = tuple ;     
+	 g++;
+	 
+	 std::cout << g << " - " << h << " - " << j << std::endl;    
+	 
+	 // with structs    
+	 MyTuple tp {10, "my tuple", 102.112};
+	 auto [k,l,m] = tp;
+	 
+	 std::cout << k << " - " << l << " - " << m << std::endl;    
+	 
+	 MyTuple tp2 {11, "my tuple 2", 5.112};
+	 std::vector<MyTuple> v {tp, tp2};
+	 
+	 for (const auto& [a, b, c] : v )
+	 {
+		 std::cout << a << " - " << b  << std::endl;    
+	 }
+	 
+	 for (auto&& [ k, v ] : get_map())
+	 {
+		std::cout << "k=" << k << " v=" << v << '\n';
+	 }
+	 
+	 return 0;	     
+}
+
+
+#+END_EXAMPLE
+
+***** string_view
+
+#+BEGIN_EXAMPLE C++
+
+/*  C++ std::string_view
+
+A wrapper/view from a tradiciona std::string.
+
+source code from: https://skebanga.github.io/string-view/
+
+
+"... C++17 makes it easy by introducing a new type called std::string_view. From now on, if you are writing a function that accepts a string,
+use an std::string_view as parameter type. No need to use an std::string_view reference. A string_view is very cheap to copy, so it’s
+perfectly fine to pass by value. Basically, a string_view just contains a pointer to a string, and its length. A string_view parameter
+accepts any kind of string, such as a C++ std::string, a C-style const char* string, and a string literal, all without any copying involved! ..."
+
+http://www.nuonsoft.com/blog/2018/06/06/c17-stdstring_view/
+
+*/
+
+#include <iostream>
+#include <string_view>
+
+using namespace std;
+
+void* operator new(std::size_t n)
+{
+    	std::cout << "[allocating " << n << " bytes]\n";
+    	return malloc(n);
+}
+
+bool compare(const std::string& s1, const std::string& s2)
+{
+    	if (s1 == s2)
+    	    return true;
+    	std::cout << '\"' << s1 << "\" does not match \"" << s2 << "\"\n";
+    	return false;
+}
+
+bool compare_v2(std::string_view s1, std::string_view s2)
+{
+    	if (s1 == s2)
+    	    return true;
+    	std::cout << '\"' << s1 << "\" does not match \"" << s2 << "\"\n";
+    	return false;
+}
+
+
+void processString(string_view myString)
+{
+   	 cout << myString; if (myString.size() >= 4)
+   	 {
+   	     cout << "   (Substring: " << myString.substr(2, 2) << ")";
+   	 }
+   	 cout << endl;
+}
+
+int main()
+{
+    	string str = "this is my input string";
+
+	compare(str, "this is the first test string");
+    	compare(str, "this is the second test string");
+    	compare(str, "this is the third test string");
+	
+	cout << "-------------------------------------------" << endl;
+	
+	compare_v2(str, "this is the first test string");
+    	compare_v2(str, "this is the second test string");
+    	compare_v2(str, "this is the third test string");
+	
+	cout << "-------------------------------------------" << endl;
+	
+	string myString1 = "Hello";
+    	const char* myString2 = "C++";
+    	processString(myString1);  // C++ string
+    	processString(myString2);  // C-style string
+    	processString("World!");   // String literal
+
+    	return 0;
+}
+
+
+#+END_EXAMPLE
+
+***** FileSystem
+
+#+BEGIN_EXAMPLE
+/*  C++ 17 FileSystem
+
+compiler flags: -lstdc++fs
+
+source code from:
+http://www.modernescpp.com/index.php/c-17-more-details-about-the-library
+
+*/
+
+#include <fstream>
+#include <iostream>
+#include <string>
+#include <filesystem>
+
+using namespace std;
+namespace fs = std::filesystem;
+
+
+int main()
+{
+	std::cout << "Current path: " << fs::current_path() << std::endl;
+	std::string dir= "sandbox/a/b";
+	fs::create_directories(dir);
+	std::ofstream("sandbox/file1.txt");
+	fs::path symPath= fs::current_path() /=  "sandbox";
+	symPath /= "syma";
+	fs::create_symlink("a", "symPath");
+	 	
+	std::cout << "fs::is_directory(dir): " << fs::is_directory(dir) << std::endl;
+	std::cout << "fs::exists(symPath): "  << fs::exists(symPath) << std::endl;
+	std::cout << "fs::symlink(symPath): " << fs::is_symlink(symPath) << std::endl;
+	 	
+	for(auto& p: fs::recursive_directory_iterator("sandbox"))
+	{
+		std::cout << p.path() << std::endl;
+	}
+	 
+	
+	return 0;
+}
+
+#+END_EXAMPLE
+
+*** Lambdas 
+
+[[https://github.com/NelsonBilber/cpp.lambdas][Source Code]]
+
+***** lambda recursive
+
+#+BEGIN_EXAMPLE C++
+/*  C++ Recursive lambdas
+
+" ... You can store it in a variable and reference that variable (although you cannot declare the type of that variable
+as auto, you would have to use an std::function object instead) ... "
+
+Source code from : 
+https://stackoverflow.com/questions/14531993/can-lambda-functions-be-recursive/14532044
+http://cpptruths.blogspot.com/2013/10/creating-recursive-lambdas-and.html
+http://www.riptutorial.com/cplusplus/example/8508/recursive-lambdas
+
+*/
+
+
+
+/*
+
+Side Note:
+
+*this vs this in C++
+====================
+
+this is a pointer, and *this is a dereferenced pointer.
+
+If you had a function that returned this, it would be a pointer to the current object, while a function that returned *this would be a "clone" of the current object, allocated on the stack -- unless you have specified the return type of the method to return a reference.
+
+https://stackoverflow.com/questions/2750316/this-vs-this-in-c#2750322
+
+*/
+
+#include <iostream>
+#include <functional>
+
+using namespace std;
+
+std::function<int(int)> create() {
+	int foo = 20;
+	std::function<int(int)> f = [=](int n) mutable {
+         std::function<int(int)> recurse = [&](int n) { 
+            	foo = 10;
+            	return (n<=2)? 1 : recurse(n-1) + recurse(n-2); 
+         	};  
+			return recurse(n);
+	};  
+  	return f;
+}
+
+template < class F >
+struct y_combinator {
+	F f;
+	// forward operator()
+	template <class... Args>
+	decltype(auto) operator()(Args&&... args) const {
+        	return f(*this, std::forward<Args>(args)...);
+    }
+};
+
+//helper functions for deduce thr type of th lamnda
+template < class F >
+y_combinator< std::decay_t <F>> make_y_combinator (F&& f){
+	return {std::forward<F>(f)};
+};
+	
+int main()
+{
+	std::function<int (int)> factorial = [&] (int i) 
+	{ 
+		return (i == 1) ? 1 : i * factorial(i - 1); 
+	};
+	
+	//ERROR
+	//When the function ends, so does the fib object and consequently, the reference inside the closure becomes invalid
+	std::function<int(int)> fib = [&fib](int n)
+  	{
+		return (n <= 2)? 1 : fib(n-1) + fib(n-2);
+  	};
+	
+	cout << factorial(5) << endl;
+	cout << fib(10) << endl;	
+	auto a = create();
+	cout << a(10) << endl;
+	
+	auto gcd = make_y_combinator(
+		[](auto&& gcd, int a, int b){
+			return b == 0 ? a : gcd(b, a%b);
+  		}
+	);
+	
+	
+	return 0;
+}
+
+#+END_EXAMPLE
+
+***** lambda capture *this (C++17)
+
+#+BEGIN_EXAMPLE C++
+
+// c++ lambda capture this by value
+
+// https://stackoverflow.com/questions/33575563/c-lambda-capture-this-vs-capture-by-reference
+
+// source code from: 
+// https://crascit.com/2015/03/01/lambdas-for-lunch/
+
+/*
+
+struct S { void f(int i); };  
+
+void S::f(int i) {  
+    [&, i]{};      // OK  
+    [&, &i]{};     // ERROR: i preceded by & when & is the default  
+    [=, this]{};   // ERROR: this when = is the default  
+    [=, *this]{ }; // OK: captures this by value. See below.
+    [i, i]{};      // ERROR: i repeated  
+}
+
+"... he this pointer may be captured by value by specifying *this in the capture clause. Capture by value means that the entire closure, which is the anonymous function object that encapulates the lambda expression, is copied to every call site where the lambda is invoked. Capture by value is useful when the lambda will execute in parallel or asynchronous operations, especially on certain hardware architectures such as NUMA...."
+
+https://docs.microsoft.com/en-us/cpp/cpp/lambda-expressions-in-cpp?view=vs-2017
+  
+*/
+
+#include <iostream>
+#include <vector>
+#include <algorithm>
+
+using namespace std;
+
+class Foo
+{
+    	int x;
+public:
+    	Foo() : x(10) {}
+
+	/*
+	Capturing the this pointer is particularly convenient and 
+	lambdas often make use of this capability. Note that capturing 
+	this by reference doesn’t really make sense (you can’t change 
+	its value), so it should always appear in a capture statement 
+	as capturing by value.
+
+	[this] - captures by value, same result as [=]
+
+	*/
+	void bar()
+    	{
+       		 // Increment x every time we are called
+        	auto lam = [this](){ return ++x; };
+        	std::cout <<"lam () => " <<lam() << std::endl;
+    	}
+};
+
+int main()
+{
+	// [captures] (parameters) -> returnType {body}
+	auto fun = [](double t){ return t*t;};
+	cout << "square(5) = " << fun(5) << endl;
+	
+	vector<int> v {23, -5, -2 , 16, 20};
+	auto c = count_if(v.begin(), v.end(), 
+			     [](int i){ return i == ((i/5)*			     
+	cout << c << endl;
+	
+	int x = 5;	
+	auto copyLambda = [x](){ return x; };
+	auto refLambda	 = [&x](){ return x; };
+	
+	std::cout << copyLambda() << std::endl;
+	std::cout << refLambda()  << std::endl;
+	x = 7;
+	std::cout << copyLambda() << std::endl;
+	std::cout << refLambda()  << std::endl;
+	
+	Foo foo;
+	foo.bar(); // Outputs 11
+	foo.bar(); // Outputs 12
+	
+	int mm = 5;	
+	auto inc = [&mm](){ return ++mm;};	
+	cout << "inc() = "<< inc() << endl; 
+ }
+
+
+
+#+END_EXAMPLE
+
+***** using lambdas as callbacks
+
+#+BEGIN_EXAMPLE C++
+
+/*  C++ 17 lambdas and callbacks
+
+https://gist.github.com/4poc/3155832
+http://bannalia.blogspot.com/2016/07/passing-capturing-c-lambda-functions-as.html
+https://embeddedartistry.com/blog/2017/1/26/c11-improving-your-callback-game
+
+# this blog has a complex example "Type safe callbacks (full example, supports capturing lambdas)"
+http://meh.schizofreni.co/programming/magic/2013/01/23/function-pointer-from-lambda.html
+
+# functors in c++
+https://stackoverflow.com/questions/356950/what-are-c-functors-and-their-uses
+
+# function pointers in C
+https://www.geeksforgeeks.org/function-pointer-in-c/
+
+*/
+
+#include <iostream>
+#include <vector>
+#include <functional>
+
+//mix old C code just for concept proof
+#include <stdio.h>
+
+using namespace std;
+
+//class with callbacks
+class WorkingClass
+{
+public:
+	typedef const std::function<void(int)> handler_t;
+	
+	void AddHandler(handler_t& h)
+	{
+		handlerList.push_back(&h);
+	}
+	
+	void DoStuff()
+	{
+		for(auto& handler: handlerList)
+		{
+			(*handler)(42);
+			(*handler)(23);
+		}
+	}
+	
+private:
+	std::vector<handler_t*> handlerList;
+	
+};
+
+//using legacy coe
+void do_something( void(*callback)(void*), void* callback_arg)
+{
+	callback(callback_arg);
+}
+
+//tradicional functor in c++ (overload operator() )
+//used for: e.g.:function with state
+struct AddF
+{
+	AddF(int x): x(x) {}
+	int operator()(int y) const { return x + y; }
+private:
+	int x; 
+};
+
+
+/* tradicional functors in Plain C */
+void fun(int a)
+{
+	printf("value %d", a);
+}
+
+int main()
+{
+	/* Exercise 01 */
+	WorkingClass wc;
+	wc.AddHandler([&](int num){ cout << "A: " << num << endl; } );
+	wc.AddHandler([&](int num){ cout << "B: " << num << endl; } );
+	wc.DoStuff();			  
+	
+	/* Exercise 02 */
+	int num_callbacks = 0;
+	auto callback =[&](){
+		std::cout << "callback called " << ++num_callbacks << " times \n";
+	};
+	
+	auto thunk = [](void* arg){
+		(*static_cast<decltype(callback)*>(arg))();
+	};
+	
+	do_something(thunk, &callback);
+	
+	/* Exercise 03 */
+	auto lambda = [](int a, float b) {
+		std::cout << "a: " << a << std::endl;
+		std::cout << "b: " << b << std::endl;
+	};
+	//function being a raw pointer
+	auto function = static_cast<void(*)(int, float)>(lambda);
+	function(1, 2.13);
+	//function begin a std::function
+	auto function2 = static_cast<std::function<void(int, float)>>(lambda);
+	function2(1, 2.13);
+
+
+	
+	// C++ tradicional functors
+	AddF ff(3);
+	int fff = ff(7);
+	std::cout  << fff << std::endl;
+
+
+	
+	// C tradiciona function pointer	
+	// return type( *name of var )(args01,args02, ...)	
+	void(*fun_ptr)(int) = &fun;
+	/* The above line is equivalent of following two 
+	void (*fun_ptr)(int); 
+	fun_ptr = &fun;*/
+	(*fun_ptr)(10); // de-referencing a function pointer and add variables
+	
+	return 0;
+}
+
+#+END_EXAMPLE
+
+
+*** mutable
+
+#+BEGIN_EXAMPLE C++
+
+/*  C++ mutable keyword
+
+Mutable keyword can be used for change a value using a const function
+
+source: https://stackoverflow.com/questions/105014/does-the-mutable-keyword-have-any-purpose-other-than-allowing-the-variable-to
+
+*/
+
+#include <iostream>
+
+using namespace std;
+
+class Test
+{
+public:
+	Test() = default;
+	
+	//silly method just for demonstration prospose
+	void increment() const {
+		Id++;
+	}
+	
+	inline int get() const {
+		return Id++;
+	}
+	
+private:
+	mutable unsigned int Id = 0;
+};
+
+int main()
+{
+	Test tt = {};
+	tt.increment();
+	cout << tt.get() << endl;
+	
+	//capture by value
+	int x = 1;
+	auto f = [=]() mutable { x = 42; };
+	f();
+	cout << x <<  " - " <<  endl;
+	
+	return 0;
+}
+
+
+#+END_EXAMPLE
+
+
+*** Concepts
+[[https://github.com/NelsonBilber/cpp.lambdas][
+Source Code]]
+
+*** Monads 
+
+[[https://github.com/NelsonBilber/cpp.monads][Source Code]]
+
+*** Variadic Templates 
+
+#+BEGIN_EXAMPLE C++
+
+/*
+ 
+ Example from: Modern C++ programming cookbook
+ */
+
+
+#include <iostream>
+#include <string>
+#include <algorithm>
+#include <vector>
+
+using namespace std;
+
+template < typename ... Ts > 
+auto sum (Ts ... ts)
+{
+    return (ts + ...);
+}
+
+template< typename R, typename ... Ts>
+auto matches( const R& range, Ts ... ts)
+{
+    return (std::count(std::begin(range), std::end(range), ts) + ... );
+}
+
+template <typename T, typename ... Ts>
+bool within(T  min, T max, Ts ... ts)
+{
+    return ((min <= ts && ts <= max) && ...);
+}
+
+template<typename T, typename ... Ts>
+void collapse_vectors(std::vector<T> &vec, Ts ... ts)
+{
+    (vec.push_back(ts), ...);
+}
+
+template <typename T>
+void printline(T t) 
+{
+     cout << t ; 
+}
+
+
+int main ()
+{
+    int the_sum { sum (1, 2, 3, 4, 5)};
+    cout << "Sum: " << the_sum << endl;
+  
+    string a {"Hello"};
+    string b {" World "};
+    cout << sum ( a, b ) << endl;
+  
+    vector<int> v { 1,2,3,4,5}; 
+    cout << "Nr. of finds = " << matches(v, 2,5) << endl;
+
+
+    cout << "is between = " << within(10, 20, 12, 15) << endl;
+    cout << "is between = " << within(10, 20, 45, 55) << endl;
+
+    std::vector<int> vv {1,2,3};    
+    collapse_vectors( vv, 5,6,8);
+    for_each(vv.begin(), vv.end(), printline<int>);
+}
+
+#+END_EXAMPLE
+
+Another example: [[https://github.com/NelsonBilber/cpp.variadic.templates][Source Code]]
+
+
+*** Move semantics 
+	
+[[https://github.com/NelsonBilber/cpp.movesemantics][Source Code]]
+
+
+*** Features by standard
 
 [[https://github.com/AnthonyCalandra/modern-cpp-features/blob/master/CPP11.md][C++11]] [[https://github.com/AnthonyCalandra/modern-cpp-features/blob/master/CPP14.md][C++14]] [[https://github.com/AnthonyCalandra/modern-cpp-features/blob/master/CPP17.md][C++17]]
 
