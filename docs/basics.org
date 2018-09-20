@@ -17,7 +17,7 @@
 ** Smart pointers 
 [[https://github.com/NelsonBilber/cpp.smartpointers][Source Code]]
 
-** STL 
+** TODO STL 
 
 *** std::accumulate
 
@@ -173,3 +173,150 @@ int main()
 ** The rule of three/five/zero 
 
 [[https://github.com/NelsonBilber/cpp.movesemantics][Source Code]]
+
+** TODO Translation Unit
+
+
+    According to standard C++ (wayback machine link) : A translation unit is the basic unit of compilation in C++. It consists of the contents of a single source file, plus the contents of any header files directly or indirectly included by it, minus those lines that were ignored using conditional preprocessing statements.
+
+    A single translation unit can be compiled into an object file, library, or executable program.
+
+    The notion of a translation unit is most often mentioned in the contexts of the One Definition Rule, and templates.
+
+https://stackoverflow.com/questions/1106149/what-is-a-translation-unit-in-c
+
+
+** TODO Internal linking vs External linking
+
+A1:
+
+When you write an implementation file (.cpp, .cxx, etc) your compiler generates a translation unit. This is the object file from your implementation file plus all the headers you #included in it.
+*Internal linkage* refers to everything only in scope of a translation unit.
+*External linkage* refers to things that exist beyond a particular translation unit. In other words, accessible through the whole program, which is the combination of all translation units (or object files).
+
+A2:
+
+As dudewat said external linkage means the symbol (function or global variable) is accessible throughout your program and internal linkage means that it's only accessible in one translation unit.
+
+You can explicitly control the linkage of a symbol by using the extern and static keywords. If the linkage isn't specified then the default linkage is extern for non-const symbols and static (internal) for const symbols.
+
+#+BEGIN_SRC C++
+
+// in namespace or global scope
+int i; // extern by default
+const int ci; // static by default
+extern const int eci; // explicitly extern
+static int si; // explicitly static
+
+// the same goes for functions (but there are no const functions)
+int foo(); // extern by default
+static int bar(); // explicitly static 
+
+#+END_SRC
+
+Note that instead of using static for internal linkage it is better to use anonymous namespaces into which you can also put classes. The linkage for anonymous namespaces has changed between C++98 and C++11 but the main thing is that they are unreachable from other translation units.
+
+#+BEGIN_SRC C++
+
+namespace {
+   int i; // external linkage but unreachable from other translation units.
+   class invisible_to_others { };
+}
+
+#+END_SRC
+
+
+A3:
+
+A translation unit refers to an implementation (.c/.cpp) file and all header (.h/.hpp) files it includes. If an object or function inside such a translation unit has internal linkage, then that specific symbol is only visible to the linker within that translation unit. If an object or function has external linkage, the linker can also see it when processing other translation units. The static keyword, when used in the global namespace, forces a symbol to have internal linkage. The extern keyword results in a symbol having external linkage.
+
+The compiler defaults the linkage of symbols such that:
+
+    Non-const global variables have external linkage by default
+    Const global variables have internal linkage by default
+    Functions have external linkage by default
+
+*Recommended*
+http://www.goldsborough.me/c/c++/linker/2016/03/30/19-34-25-internal_and_external_linkage_in_c++/
+
+
+https://stackoverflow.com/questions/1358400/what-is-external-linkage-and-internal-linkage
+http://www.goldsborough.me/c/c++/linker/2016/03/30/19-34-25-internal_and_external_linkage_in_c++/
+https://stackoverflow.com/questions/998425/why-does-const-imply-internal-linkage-in-c-when-it-doesnt-in-c
+https://stackoverflow.com/questions/998425/why-does-const-imply-internal-linkage-in-c-when-it-doesnt-in-c
+
+** TODO Name Mangling vs Virtual Functions vs Function Overloading
+In compiler construction, name mangling (also called name decoration) is a technique used to solve various problems caused by the need to resolve unique names for programming entities in many modern programming languages.
+It provides a way of encoding additional information in the name of a function, structure, class or another datatype in order to pass more semantic information from the compilers to linkers.
+The need arises where the language allows different entities to be named with the same identifier as long as they occupy a different namespace (where a namespace is typically defined by a module, class, or explicit namespace directive) or have different signatures (such as function overloading).
+Any object code produced by compilers is usually linked with other pieces of object code (produced by the same or another compiler) by a type of program called a linker. The linker needs a great deal of information on each program entity. For example, to correctly link a function it needs its name, the number of arguments and their types, and so on.
+https://en.wikipedia.org/wiki/Name_mangling 
+
+In object-oriented programming, in languages such as C++, and Object Pascal, a virtual function or virtual method is an inheritable and overridable function or method for which dynamic dispatch is facilitated. This concept is an important part of the (runtime) polymorphism portion of object-oriented programming (OOP). In short, a virtual function defines a target function to be executed, but the target might not be known at compile time.
+https://en.wikipedia.org/wiki/Virtual_function
+
+Rules in function overloading
+The same function name is used for more than one function definition
+The functions must differ either by the arity or types of their parameters
+It is a classification of static polymorphism in which a function call is resolved using some "best match" algorithm, where the particular function to call is resolved by finding the best match of the formal parameter types with the actual parameter types. The details of this algorithm vary from language to language.
+Function overloading is usually associated with statically-typed programming languages that enforce type checking in function calls. An overloaded function is really just a set of different functions that happen to have the same name. 
+
+https://en.wikipedia.org/wiki/Function_overloading
+
+** TODO void*
+
+*void pointers*
+The void type of pointer is a special type of pointer. In C++, void represents the absence of type. Therefore, void pointers are pointers that point to a value that has no type (and thus also an undetermined length and undetermined dereferencing properties).
+
+This gives void pointers a great flexibility, by being able to point to any data type, from an integer value or a float to a string of characters. In exchange, they have a great limitation: the data pointed to by them cannot be directly dereferenced (which is logical, since we have no type to dereference to), and for that reason, any address in a void pointer needs to be transformed into some other pointer type that points to a concrete data type before being dereferenced.
+
+One of its possible uses may be to pass generic parameters to a function. For example: 
+
+http://www.cplusplus.com/doc/tutorial/pointers/
+
+
+A pointer to void is a "generic" pointer type. A void * can be converted to any other pointer type without an explicit cast. You cannot dereference a void * or do pointer arithmetic with it; you must convert it to a pointer to an complete data type first.
+
+It gets used in places where you need to be able to work with different pointer types in the same code. One commonly cited example is the library function qsort:
+
+void qsort(void *base, size_t nmemb, size_t size, 
+           int (*compar)(const void *, const void *));
+base is the address of an array, nmemb is the number of elements in the array, size is the size of each element, and compar is a pointer to a function that compares two elements of the array. It gets called like so:
+
+int iArr[10];
+double dArr[30];
+long lArr[50];
+...
+qsort(iArr, sizeof iArr/sizeof iArr[0], sizeof iArr[0], compareInt);
+qsort(dArr, sizeof dArr/sizeof dArr[0], sizeof dArr[0], compareDouble);
+qsort(lArr, sizeof lArr/sizeof lArr[0], sizeof lArr[0], compareLong);
+The array expressions iArr, dArr, and lArr are implicitly converted from array types to pointer types in the function call, and each is implicitly converted from "pointer to int/double/long" to "pointer to void".
+
+The comparison functions would look something like:
+
+int compareInt(const void *lhs, const void *rhs)
+{
+  const int *x = lhs;  // convert void * to int * by assignment
+  const int *y = rhs;
+
+  if (*x > *y) return 1;
+  if (*x == *y) return 0;
+  return -1;
+}
+By accepting void *, qsort can work with arrays of any type.
+
+The disadvantage of using void * is that you throw type safety out the window and into oncoming traffic. There's nothing to protect you from using the wrong comparison routine:
+
+qsort(dArr, sizeof dArr/sizeof dArr[0], sizeof dArr[0], compareInt);
+compareInt is expecting its arguments to be pointing to ints, but is actually working with doubles. There's no way to catch this problem at compile time; you'll just wind up with a mis-sorted array.
+
+https://stackoverflow.com/questions/11626786/what-does-void-mean-and-how-to-use-it
+
+11 standard (n1570) §6.2.2.3 al1 p55 says :
+A pointer to void may be converted to or from a pointer to any object type. A pointer to any object type may be converted to a pointer to void and back again; the result shall compare equal to the original pointer.
+You can use this generic pointer to store a pointer to any object type, but you can't use usual arithmetic operations with it and you can't deference it.
+
+https://stackoverflow.com/questions/11626786/what-does-void-mean-and-how-to-use-it
+
+
+** TODO Deep copy vs shallow copy
