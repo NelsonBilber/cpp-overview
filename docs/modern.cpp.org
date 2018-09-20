@@ -578,6 +578,86 @@ int main()
 
 #+END_EXAMPLE
 
+**** Parallel Algorithms
+
+/* C++17 in details: Parallel Algorithms
+
+Supported Algorithm
+-------------------
+check list here
+http://www.modernescpp.com/index.php/parallel-algorithm-of-the-standard-template-library
+
+Execution policies
+-------------------
+The execution policy parameter will tell the algorithm how it should be executed. We have the following options:
+
+sequenced_policy - is an execution policy type used as a unique type to disambiguate parallel algorithm overloading and require that a parallel algorithm’s execution may not be parallelized. 
+the corresponding global object is std::execution::seq
+parallel_policy - is an execution policy type used as a unique type to disambiguate parallel algorithm overloading and indicate that a parallel algorithm’s execution may be parallelized. 
+the corresponding global object is std::execution::par
+parallel_unsequenced_policy - is an execution policy type used as a unique type to disambiguate parallel algorithm overloading and indicate that a parallel algorithm’s execution may be parallelized and vectorized. 
+the corresponding global object is std::execution::par_unseq
+
+text extracted from : https://www.bfilipek.com/2017/08/cpp17-details-parallel.html
+source code based from : https://stackoverflow.com/questions/21516575/fill-a-vector-with-random-numbers-c
+
+*/
+
+#+BEGIN_SRC C++
+
+#include <iostream>
+#include <functional>
+#include <algorithm>
+#include <random>
+#include <execution>
+
+using namespace std;
+
+void print(const vector<int>& vec)
+{
+	for( auto& i: vec)
+	{
+		cout << i << " ";
+	}
+	cout << endl;
+}
+
+int main()
+{
+	random_device rnd_device;
+	mt19937 mersenne_engine {rnd_device()};
+	uniform_int_distribution <int> dist {1, 52};
+	
+	auto gen = [&dist, &mersenne_engine](){ return dist(mersenne_engine);};
+	
+	vector<int> vec(100);
+	std::generate(begin(vec), end(vec), gen);
+	print(vec);
+	
+	cout << "standard sort" << endl;
+	std::sort(vec.begin(), vec.end());
+	print(vec);
+	
+	std::shuffle(begin(vec), end(vec), mersenne_engine);
+	
+	cout << "Sequential sort" << endl;
+	std::sort(std::execution::seq, vec.begin(), vec.end());
+	print(vec);
+	
+	std::shuffle(begin(vec), end(vec), mersenne_engine);	
+	cout << "Permiting parallel execution sort" << endl;
+	std::sort(std::execution::par, vec.begin(), vec.end());
+	print(vec);
+	
+	std::shuffle(begin(vec), end(vec), mersenne_engine);	
+	cout << "Permiting parallel and vectorization execution sort" << endl;
+	std::sort(std::execution::par_unseq, vec.begin(), vec.end());
+	print(vec);
+	
+	return 0;
+}
+
+#+END_SRC
 
 *** Lambdas 
 

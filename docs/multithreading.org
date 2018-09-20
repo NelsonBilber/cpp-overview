@@ -11,4 +11,135 @@ Concepts/ideas:
 - Atomic Operations, Lock free data structures, ...
 - Models/Architectures: One writer and multiple readers, ....
 
+
+** Qt - Worker Thread
+
 The follow example uses Qt polemic thread management to describe a [[https://github.com/NelsonBilber/Qt/tree/master/WorkerQueue][Worker Queue]]  
+
+
+** std::future and std::promises
+
+/* C++ Future and promises 
+
+"... The class template std::future provides a mechanism to access the result of asynchronous operations:
+An asynchronous operation (created via std::async, std::packaged_task, or std::promise) can provide a 
+std::future object to the creator of that asynchronous operation..."
+
+source code from:
+https://en.cppreference.com/w/cpp/thread/future
+
+Futures vs. Promisses
+---------------------
+"... Future and Promise are the two separate sides of an asynchronous operation.
+(...)
+std::promise is used by the "producer/writer" of the asynchronous operation.
+std::future is used by the "consumer/reader" of the asynchronous operation. ..."
+(...)
+https://stackoverflow.com/questions/12620186/futures-vs-promises
+
+
+When is it a good idea to use std::promise over the other std::thread mechanisms?
+---------------------------------------------------------------------------------
+(...)
+std::future is a strange beast: in general, you cannot modify its value directly.
+Three producers which can modify its value are:
+std::async through an asynchronous callback, which will return a std::future instance.
+std::packaged_task, which, when passed to a thread, will invoke its callback thereby updating the std::future instance associated with that std::packaged_task. This mechanism allows for early binding of a producer, but a later invocation.
+std::promise, which allows one to modify its associated std::future through its set_value() call. With this direct control over mutating a std::future, we must ensure that that the design is thread-safe if there are multiple producers (use std::mutex as necessitated).
+(...)
+https://stackoverflow.com/questions/14283703/when-is-it-a-good-idea-to-use-stdpromise-over-the-other-stdthread-mechanisms
+
+
+What is std::promise?
+---------------------
+(...)
+In the words of [futures.state] a std::future is an asynchronous return object ("an object that reads results from a shared state") and a std::promise is an asynchronous provider ("an object that provides a result to a shared state") i.e. a promise is the thing that you set a result on, so that you can get it from the associated future.
+The asynchronous provider is what initially creates the shared state that a future refers to. std::promise is one type of asynchronous provider, std::packaged_task is another, and the internal detail of std::async is another. Each of those can create a shared state and give you a std::future that shares that state, and can make the state ready.
+std::async is a higher-level convenience utility that gives you an asynchronous result object and internally takes care of creating the asynchronous provider and making the shared state ready when the task completes. You could emulate it with a std::packaged_task (or std::bind and a std::promise) and a std::thread but it's safer and easier to use std::async.
+std::promise is a bit lower-level, for when you want to pass an asynchronous result to the future, but the code that makes the result ready cannot be wrapped up in a single function suitable for passing to std::async. For example, you might have an array of several promises and associated futures and have a single thread which does several calculations and sets a result on each promise. async would only allow you to return a single result, to return several you would need to call async several times, which might waste resources.
+(...)
+https://stackoverflow.com/questions/11004273/what-is-stdpromise/12335206#12335206
+
+
+threads, promises, futures, async, C++
+----------------------------------------
+(...)
+std::future and std::promise
+Futures and promises are two sides of the same coin, so to speak. A promise allows us to return state from a thread. Whereas a future is for reading that returned state.
+std::async
+The example for the promise/future combination to create a producer consumer can be simplified further using the std::async which basically deals with creating a thread and creating a future for us.
+(...)
+
+from:
+http://putridparrot.com/blog/threads-promises-futures-async-c/
+
+Another nice reference:
+(...)
+Many times we encounter a situation where we want a thread to return a result.
+...
+std::future is a class template and its object stores the future value.
+Now what the hell is this future value.
+Actually a std::future object internally stores a value that will be assigned in future and it also provides a mechanism to access that value i.e. using get() member function. But if somebody tries to access this associated value of future through get() function before it is available, then get() function will block till value is not available.
+std::promise is also a class template and its object promises to set the value in future. Each std::promise object has an associated std::future object that will give the value once set by the std::promise object.
+A std::promise object shares data with its associated std::future object.
+(...)
+
+https://thispointer.com/c11-multithreading-part-8-stdfuture-stdpromise-and-returning-values-from-thread/
+*/
+
+#+BEGIN_SRC C++
+
+#include <iostream>
+#include <future>
+#include <thread>
+
+int main()
+{
+	//future from a package task
+	std::packaged_task<int()> task([]{return 7;}); //wrap the function
+	//consumer
+	std::future<int> f1 = task.get_future(); //get a future
+	std::thread t(std::move(task)); //lauch on a thread
+	
+	//future from an async()
+	std::future<int> f2 = std::async(std::launch::async, []{return 8;} );
+	
+	// future from a promise
+	std::promise<int> p;
+	std::future<int> f3 = p.get_future();
+	std::thread( [&p]{ p.set_value_at_thread_exit(9); }).detach();
+	
+	std::cout << "waiting" << std::flush;
+	f1.wait();
+	f2.wait();
+	f3.wait();
+	std::cout << "Done!\nResults are: "<< f1.get() << ' ' << f2.get() << ' ' << f3.get() << '\n';
+	t.join();
+	
+	/* Example 02 - ho to use a std::future and std::promisse*/
+	/* http://putridparrot.com/blog/threads-promises-futures-async-c/ */
+	auto promise = std::promise<std::string>();
+	auto producer = std::thread([&]
+	{
+		std::cout << "Start Producer " <<std::endl;
+	   	// simulate some long-ish running task	
+   		std::this_thread::sleep_for(std::chrono::seconds(5));
+   		promise.set_value("Some Message");
+	}); 
+	
+	auto future = promise.get_future();
+	auto consumer = std::thread([&]
+	{
+		std::cout << "Start Consumer ... " <<std::endl;
+   		std::cout << future.get().c_str() <<std::endl;
+	});
+ 
+	// for testing, we'll block the current thread
+	// until these have completed
+	producer.join();
+	consumer.join();
+	
+	return 0;
+}
+
+#+END_SRC
