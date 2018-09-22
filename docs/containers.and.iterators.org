@@ -207,12 +207,15 @@ separating "," or a new line after each item.
 #+CAPTION: STL logo
 #+NAME:   STL
 #+ATTR_HTML: :style margin-left: auto; margin-right: auto;
-[[.,/imgs/stl.png]]
+[[../imgs/stl.png]]
 
 https://stackoverflow.com/questions/471432/in-which-scenario-do-i-use-a-particular-stl-container
 
 *** Complexity Big-Oh
-http://john-ahlgren.blogspot.com/2013/10/stl-container-performance.html
+
+[[https://stackoverflow.com/questions/181693/what-are-the-complexity-guarantees-of-the-standard-containers][What are the complexity guarantees of the standard containers?]]
+
+[[http://john-ahlgren.blogspot.com/2013/10/stl-container-performance.html][STL Container Performance]]
 
 *** Scott Meyers
 Look at Effective STL by Scott Meyers. It's good at explaining how to use the STL.
