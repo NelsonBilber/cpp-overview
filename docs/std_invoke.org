@@ -1,0 +1,58 @@
+#+Author: Nelson Bilber Rodrigues
+#+title: C++ 17 std::invoke
+
+
+*source code from:* https://en.cppreference.com/w/cpp/utility/functional/invoke
+
+
+#+BEGIN_SRC C++ 
+
+
+#include <iostream>
+#include <functional>
+
+using namespace std;
+
+struct Foo 
+{
+	Foo(int num) : num_(num) {}
+	void print_add(int i) const { std::cout << num_+i << '\n'; }
+	int num_;
+};
+
+void print_num(int i) 
+{
+	std::cout << i << '\n';
+}
+
+struct PrintNum 
+{
+	void operator()(int i) const 
+	{
+        	std::cout << i << '\n';
+	}
+};
+	
+int main()
+{
+	//invoke free function
+	std::invoke(print_num, -9);
+	
+	//invoke a lambda
+	std::invoke([]() {print_num(42); });
+	
+	//Invoke a member function
+	const Foo foo(25);
+	std::invoke(&Foo::print_add, foo, 1);
+	
+	//invoke (access) a data member
+	cout << "num_: " << std::invoke(&Foo::num_, foo) << endl;
+	
+	//invoke a function object
+	std::invoke(PrintNum(), 18);
+	
+	return 0;
+}
+
+#+END_SRC
+

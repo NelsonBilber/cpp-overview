@@ -1,0 +1,50 @@
+#+Author: Nelson Bilber Rodrigues
+#+title: C++ 17 std::functional
+
+std::function is a templated object that is used to store and call any 
+callable type, such as functions, objects, lambdas and the result of std::bind
+
+*source code from:* https://shaharmike.com/cpp/lambdas-and-functions/#std-function
+
+
+#+BEGIN_SRC C++
+
+
+#include <iostream>
+#include <functional>
+
+using namespace std;
+
+
+void global_f()
+{
+	cout << "global_f()" << endl;
+}
+
+struct Functor
+{
+	void operator()() {cout << "Functor" << endl;}
+};
+
+int main()
+{
+	std::function<void()> f;
+	cout << "sizeof(f): " << sizeof(f) << endl;
+	
+	f = global_f;
+	f();
+	
+	f = [](){cout << "lambda" << endl;};
+	f();
+	
+	Functor functor;
+	f = functor;
+	f();
+	
+	f = std::bind(global_f);
+	f();
+		
+	return 0;
+}
+
+#+END_SRC

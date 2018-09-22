@@ -5,188 +5,24 @@
 This is a very wide topic, It's a programming paradigm. With modern C++ has gain attention again.  
 Next link presents "just a simple" example how can be used in C++.
 
-** Higher Order Functions
 
-#+BEGIN_SRC C++
+[[file:cpp.functional.higherorderfunctions.org][higher order function]]
 
-/* c++ Higher order functions
+[[std_invoke.org][std::invoke]]
 
-... higher-order functions can take functions as argument or
-return them as result...
-
-... Each programming language supporting programming in the functional 
-style supports at least the three functions map, filter, and fold. 
-map applies a function to each element of its list. 
-filter removes all elements of a list not satisfying a condition. 
-fold is the most powerful of the three ones. 
-fold successively applies a binary operation to 
-pairs of the list and therefore reduces the list to a value ...
-
-map ------> std::transform
-filter ---> std::remove_if
-fold -----> std::accumulate
-
-Quoted from:
-http://www.modernescpp.com/index.php/higher-order-functions
-
-*/
-
-#include <iostream>
-#include <functional>
-#include <algorithm>
-#include <vector>
-#include <string>
-#include <numeric>
-
-using namespace std;
-
-int main()
-{
-	std::vector<string> str {"programming", "in", "a", "functional", "style"};
-	 	    
-	//map
-	std::vector<int> vec2;
-	std::transform(str.begin(), str.end(), std::back_inserter(vec2),
-	 			[](std::string s){ return s.length ();} );
-	for( auto&& v: vec2) {
-	    cout << v << " ";
-	}
-	cout << endl;
-	 
-	//reduce
-	std::vector<string> str2 {"Programming", "in", "a", "functional", "style"};
-	auto it = std::remove_if (str2.begin(), str2.end(),
-	 			  [](std::string s){ return !(std::isupper(s[0]));});
-	cout << *it << endl;
-	 
-	//fold
-	std::vector<string> str3 {"Programming", "in", "a", "functional", "style"};
-	std::accumulate(str3.begin(), str3.end(), string(""),
-	 	    [](std::string a,std::string b){ return a+":"+b; });
-	 
-	for( auto&& v: str3) {
-	    cout << v << " ";
-	}
-	cout << endl;
-	return 0;   
-}
+[[std_functional.org][std::functional]]
 
 
-#+END_SRC
+** other examples
 
 
-** std::invoke
+object a calls a function on object b 
+a->b
+object a class a function on object b and then b calls an function on object a
+a->b->a
+ 
+[[https://github.com/NelsonBilber/cpp.functional][Call Methods on other Objects]]
 
-#+BEGIN_SRC C++ 
-
-/*  C++ 17 std::invoke
-
-source code from:
-https://en.cppreference.com/w/cpp/utility/functional/invoke
-
-*/
-
-#include <iostream>
-#include <functional>
-
-using namespace std;
-
-struct Foo 
-{
-	Foo(int num) : num_(num) {}
-	void print_add(int i) const { std::cout << num_+i << '\n'; }
-	int num_;
-};
-
-void print_num(int i) 
-{
-	std::cout << i << '\n';
-}
-
-struct PrintNum 
-{
-	void operator()(int i) const 
-	{
-        	std::cout << i << '\n';
-	}
-};
-	
-int main()
-{
-	//invoke free function
-	std::invoke(print_num, -9);
-	
-	//invoke a lambda
-	std::invoke([]() {print_num(42); });
-	
-	//Invoke a member function
-	const Foo foo(25);
-	std::invoke(&Foo::print_add, foo, 1);
-	
-	//invoke (access) a data member
-	cout << "num_: " << std::invoke(&Foo::num_, foo) << endl;
-	
-	//invoke a function object
-	std::invoke(PrintNum(), 18);
-	
-	return 0;
-}
-
-#+END_SRC
-
-** std::functional
-
-#+BEGIN_SRC C++
-
-/*  C++ 17 std::function
-
-std::function is a templated object that is used to store and call any 
-callable type, such as functions, objects, lambdas and the result of std::bind
-
-source code from:
-https://shaharmike.com/cpp/lambdas-and-functions/#std-function
-
-*/
-
-#include <iostream>
-#include <functional>
-
-using namespace std;
-
-
-void global_f()
-{
-	cout << "global_f()" << endl;
-}
-
-struct Functor
-{
-	void operator()() {cout << "Functor" << endl;}
-};
-
-int main()
-{
-	std::function<void()> f;
-	cout << "sizeof(f): " << sizeof(f) << endl;
-	
-	f = global_f;
-	f();
-	
-	f = [](){cout << "lambda" << endl;};
-	f();
-	
-	Functor functor;
-	f = functor;
-	f();
-	
-	f = std::bind(global_f);
-	f();
-		
-	return 0;
-}
-
-#+END_SRC
-
-** Other Examples
+Some examples how to use std::function<...>
 
 [[https://github.com/NelsonBilber/cpp.functional.programming][Source Code]]
