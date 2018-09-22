@@ -203,6 +203,12 @@ separating "," or a new line after each item.
 * When to use it ?
 
 *** Nice Flowchart !!!
+
+#+CAPTION: STL logo
+#+NAME:   STL
+#+ATTR_HTML: :style margin-left: auto; margin-right: auto;
+[[.,/imgs/stl.png]]
+
 https://stackoverflow.com/questions/471432/in-which-scenario-do-i-use-a-particular-stl-container
 
 *** Complexity Big-Oh
@@ -291,6 +297,14 @@ The underlying data structure is a balanced search tree:
 - requires order comparisons of keys
 - iteration in key order
 - Iterators, pointers and references stay valid until the pointed to element is removed.
+
+
+
+* Cheat Sheet 
+
+[[http://homepages.e3.net.nz/~djm/cppcontainers.html][C++ Containers Cheat Sheet]]
+
+[[http://homepages.e3.net.nz/~djm/cppiterators.html][C++ Iterators & Algorithms Cheat Shee]]t
 
 
 * Links and References
