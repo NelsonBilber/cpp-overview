@@ -1,6 +1,8 @@
 #+Title: C++ Basics 
 #+AUTHOR: Nelson Rodrigues
 
+Important concepts about C++ programming language
+
 
 | Topic                                         | Description                                                                              |
 |-----------------------------------------------+------------------------------------------------------------------------------------------|
