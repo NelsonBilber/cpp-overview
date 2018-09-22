@@ -1,360 +1,44 @@
-#+TITLE: Modern C++ (C++11\C++14\C++17)
+#+TITLE: Modern C++ (11\14\17)
 #+AUTHOR: Nelson Rodrigues
 
 
 *** C++17
 
-| Topic                    | Description                                                |
-|--------------------------+------------------------------------------------------------|
-| initalization list       | [[file:cpp17.initialization.list.org][Initalization List]] |
-| inline variables         | [[file:cpp17.inline.org][inline variables]]                |
-| anonymous namespaces     | [[file:cpp17.anonym.org][anonymous namespaces]]            |
-| nested namespaces        | [[file:cpp17.nested.org][nested namespaces]]               |
-| template decuction       | [[file:cpp17.template.deduction.org][template deduction]]  |
-| initializer if-statement | [[file:cpp17initalizarif.or][initializer if-statement]]    |
-| structure unbinding      | [[file:cpp17.structure.binding.org][structure binding]]    |
-| string_view              | [[file:cpp17.string.view.org][string_view]]                |
-| filesystem               | [[file:cpp17.filesystem.org][filesystem]]                  |
-| parallel algorithms      | [[file:cpp17.palgortihms.org][Parallel Algorithms]]        |
+| Topic                    | Description                                                          |
+|--------------------------+----------------------------------------------------------------------|
+| initalization list       | more ...  [[file:cpp17.initialization.list.org][Initalization List]] |
+| inline variables         | more ...  [[file:cpp17.inline.org][inline variables]]                |
+| anonymous namespaces     | more ...  [[file:cpp17.anonym.org][anonymous namespaces]]            |
+| nested namespaces        | more ...  [[file:cpp17.nested.org][nested namespaces]]               |
+| template decuction       | more ...  [[file:cpp17.template.deduction.org][template deduction]]  |
+| initializer if-statement | more ...  [[file:cpp17.initalizarif.org][initializer if-statement]]  |
+| structure unbinding      | more ...  [[file:cpp17.structure.binding.org][structure binding]]    |
+| string_view              | more ...  [[file:cpp17.string.view.org][string_view]]                |
+| filesystem               | more ...  [[file:cpp17.filesystem.org][filesystem]]                  |
+| parallel algorithms      | more ...  [[file:cpp17.palgorithms.org][Parallel Algorithms]]        |
+
 
 
 *** Lambdas 
 
-[[https://github.com/NelsonBilber/cpp.lambdas][Source Code]]
 
-**** lambda recursive
-
-#+BEGIN_EXAMPLE C++
-/*  C++ Recursive lambdas
-
-" ... You can store it in a variable and reference that variable (although you cannot declare the type of that variable
-as auto, you would have to use an std::function object instead) ... "
-
-Source code from : 
-https://stackoverflow.com/questions/14531993/can-lambda-functions-be-recursive/14532044
-http://cpptruths.blogspot.com/2013/10/creating-recursive-lambdas-and.html
-http://www.riptutorial.com/cplusplus/example/8508/recursive-lambdas
-
-*/
-
-
-
-/*
-
-Side Note:
-
-*this vs this in C++
-====================
-
-this is a pointer, and *this is a dereferenced pointer.
-
-If you had a function that returned this, it would be a pointer to the current object, while a function that returned *this would be a "clone" of the current object, allocated on the stack -- unless you have specified the return type of the method to return a reference.
-
-https://stackoverflow.com/questions/2750316/this-vs-this-in-c#2750322
-
-*/
-
-#include <iostream>
-#include <functional>
-
-using namespace std;
-
-std::function<int(int)> create() {
-	int foo = 20;
-	std::function<int(int)> f = [=](int n) mutable {
-         std::function<int(int)> recurse = [&](int n) { 
-            	foo = 10;
-            	return (n<=2)? 1 : recurse(n-1) + recurse(n-2); 
-         	};  
-			return recurse(n);
-	};  
-  	return f;
-}
-
-template < class F >
-struct y_combinator {
-	F f;
-	// forward operator()
-	template <class... Args>
-	decltype(auto) operator()(Args&&... args) const {
-        	return f(*this, std::forward<Args>(args)...);
-    }
-};
-
-//helper functions for deduce thr type of th lamnda
-template < class F >
-y_combinator< std::decay_t <F>> make_y_combinator (F&& f){
-	return {std::forward<F>(f)};
-};
-	
-int main()
-{
-	std::function<int (int)> factorial = [&] (int i) 
-	{ 
-		return (i == 1) ? 1 : i * factorial(i - 1); 
-	};
-	
-	//ERROR
-	//When the function ends, so does the fib object and consequently, the reference inside the closure becomes invalid
-	std::function<int(int)> fib = [&fib](int n)
-  	{
-		return (n <= 2)? 1 : fib(n-1) + fib(n-2);
-  	};
-	
-	cout << factorial(5) << endl;
-	cout << fib(10) << endl;	
-	auto a = create();
-	cout << a(10) << endl;
-	
-	auto gcd = make_y_combinator(
-		[](auto&& gcd, int a, int b){
-			return b == 0 ? a : gcd(b, a%b);
-  		}
-	);
-	
-	
-	return 0;
-}
-
-#+END_EXAMPLE
-
-**** lambda capture *this (C++17)
-
-#+BEGIN_EXAMPLE C++
-
-// c++ lambda capture this by value
-
-// https://stackoverflow.com/questions/33575563/c-lambda-capture-this-vs-capture-by-reference
-
-// source code from: 
-// https://crascit.com/2015/03/01/lambdas-for-lunch/
-
-/*
-
-struct S { void f(int i); };  
-
-void S::f(int i) {  
-    [&, i]{};      // OK  
-    [&, &i]{};     // ERROR: i preceded by & when & is the default  
-    [=, this]{};   // ERROR: this when = is the default  
-    [=, *this]{ }; // OK: captures this by value. See below.
-    [i, i]{};      // ERROR: i repeated  
-}
-
-"... he this pointer may be captured by value by specifying *this in the capture clause. Capture by value means that the entire closure, which is the anonymous function object that encapulates the lambda expression, is copied to every call site where the lambda is invoked. Capture by value is useful when the lambda will execute in parallel or asynchronous operations, especially on certain hardware architectures such as NUMA...."
-
-https://docs.microsoft.com/en-us/cpp/cpp/lambda-expressions-in-cpp?view=vs-2017
-  
-*/
-
-#include <iostream>
-#include <vector>
-#include <algorithm>
-
-using namespace std;
-
-class Foo
-{
-    	int x;
-public:
-    	Foo() : x(10) {}
-
-	/*
-	Capturing the this pointer is particularly convenient and 
-	lambdas often make use of this capability. Note that capturing 
-	this by reference doesn’t really make sense (you can’t change 
-	its value), so it should always appear in a capture statement 
-	as capturing by value.
-
-	[this] - captures by value, same result as [=]
-
-	*/
-	void bar()
-    	{
-       		 // Increment x every time we are called
-        	auto lam = [this](){ return ++x; };
-        	std::cout <<"lam () => " <<lam() << std::endl;
-    	}
-};
-
-int main()
-{
-	// [captures] (parameters) -> returnType {body}
-	auto fun = [](double t){ return t*t;};
-	cout << "square(5) = " << fun(5) << endl;
-	
-	vector<int> v {23, -5, -2 , 16, 20};
-	auto c = count_if(v.begin(), v.end(), 
-			     [](int i){ return i == ((i/5)*			     
-	cout << c << endl;
-	
-	int x = 5;	
-	auto copyLambda = [x](){ return x; };
-	auto refLambda	 = [&x](){ return x; };
-	
-	std::cout << copyLambda() << std::endl;
-	std::cout << refLambda()  << std::endl;
-	x = 7;
-	std::cout << copyLambda() << std::endl;
-	std::cout << refLambda()  << std::endl;
-	
-	Foo foo;
-	foo.bar(); // Outputs 11
-	foo.bar(); // Outputs 12
-	
-	int mm = 5;	
-	auto inc = [&mm](){ return ++mm;};	
-	cout << "inc() = "<< inc() << endl; 
- }
-
-
-
-#+END_EXAMPLE
-
-**** using lambdas as callbacks
-
-#+BEGIN_EXAMPLE C++
-
-/*  C++ 17 lambdas and callbacks
-
-https://gist.github.com/4poc/3155832
-http://bannalia.blogspot.com/2016/07/passing-capturing-c-lambda-functions-as.html
-https://embeddedartistry.com/blog/2017/1/26/c11-improving-your-callback-game
-
-# this blog has a complex example "Type safe callbacks (full example, supports capturing lambdas)"
-http://meh.schizofreni.co/programming/magic/2013/01/23/function-pointer-from-lambda.html
-
-# functors in c++
-https://stackoverflow.com/questions/356950/what-are-c-functors-and-their-uses
-
-# function pointers in C
-https://www.geeksforgeeks.org/function-pointer-in-c/
-
-*/
-
-#include <iostream>
-#include <vector>
-#include <functional>
-
-//mix old C code just for concept proof
-#include <stdio.h>
-
-using namespace std;
-
-//class with callbacks
-class WorkingClass
-{
-public:
-	typedef const std::function<void(int)> handler_t;
-	
-	void AddHandler(handler_t& h)
-	{
-		handlerList.push_back(&h);
-	}
-	
-	void DoStuff()
-	{
-		for(auto& handler: handlerList)
-		{
-			(*handler)(42);
-			(*handler)(23);
-		}
-	}
-	
-private:
-	std::vector<handler_t*> handlerList;
-	
-};
-
-//using legacy coe
-void do_something( void(*callback)(void*), void* callback_arg)
-{
-	callback(callback_arg);
-}
-
-//tradicional functor in c++ (overload operator() )
-//used for: e.g.:function with state
-struct AddF
-{
-	AddF(int x): x(x) {}
-	int operator()(int y) const { return x + y; }
-private:
-	int x; 
-};
-
-
-/* tradicional functors in Plain C */
-void fun(int a)
-{
-	printf("value %d", a);
-}
-
-int main()
-{
-	/* Exercise 01 */
-	WorkingClass wc;
-	wc.AddHandler([&](int num){ cout << "A: " << num << endl; } );
-	wc.AddHandler([&](int num){ cout << "B: " << num << endl; } );
-	wc.DoStuff();			  
-	
-	/* Exercise 02 */
-	int num_callbacks = 0;
-	auto callback =[&](){
-		std::cout << "callback called " << ++num_callbacks << " times \n";
-	};
-	
-	auto thunk = [](void* arg){
-		(*static_cast<decltype(callback)*>(arg))();
-	};
-	
-	do_something(thunk, &callback);
-	
-	/* Exercise 03 */
-	auto lambda = [](int a, float b) {
-		std::cout << "a: " << a << std::endl;
-		std::cout << "b: " << b << std::endl;
-	};
-	//function being a raw pointer
-	auto function = static_cast<void(*)(int, float)>(lambda);
-	function(1, 2.13);
-	//function begin a std::function
-	auto function2 = static_cast<std::function<void(int, float)>>(lambda);
-	function2(1, 2.13);
-
-
-	
-	// C++ tradicional functors
-	AddF ff(3);
-	int fff = ff(7);
-	std::cout  << fff << std::endl;
-
-
-	
-	// C tradiciona function pointer	
-	// return type( *name of var )(args01,args02, ...)	
-	void(*fun_ptr)(int) = &fun;
-	/* The above line is equivalent of following two 
-	void (*fun_ptr)(int); 
-	fun_ptr = &fun;*/
-	(*fun_ptr)(10); // de-referencing a function pointer and add variables
-	
-	return 0;
-}
-
-#+END_EXAMPLE
+| Topic                 | Description                                                                |
+|-----------------------+----------------------------------------------------------------------------|
+| lambda recursive      | more info ... [[file:lambda.recursive.org][lambda recursive]]              |
+| capture *this (c++17) | more info ... [[file:lambda.this.org][*this (C++17)]]                      |
+| lambdas as callback   | more info ... [[file:lambda.callback.org][lambda as callback]]             |
+| monads                | more info ... [[https://github.com/NelsonBilber/cpp.monads][Source Code]]  |
+| others                | more info ... [[https://github.com/NelsonBilber/cpp.lambdas][Source Code]] |
 
 
 *** mutable
 
-#+BEGIN_EXAMPLE C++
-
-/*  C++ mutable keyword
-
 Mutable keyword can be used for change a value using a const function
 
-source: https://stackoverflow.com/questions/105014/does-the-mutable-keyword-have-any-purpose-other-than-allowing-the-variable-to
+*source:* https://stackoverflow.com/questions/105014/does-the-mutable-keyword-have-any-purpose-other-than-allowing-the-variable-to
 
-*/
+
+#+BEGIN_EXAMPLE C++
 
 #include <iostream>
 
@@ -399,27 +83,12 @@ int main()
 #+END_EXAMPLE
 
 
-*** Concepts
-
-[[https://github.com/NelsonBilber/cpp.lambdas][Source Code]]
-
-
-*** Monads 
-
-[[https://github.com/NelsonBilber/cpp.monads][Source Code]]
-
-
 *** Variadic Templates 
 
-#+BEGIN_EXAMPLE C++
+*Example from:* Modern C++ programming cookbook
 
-/*
- 
- Example from: Modern C++ programming cookbook
- */
+#+BEGIN_SRC C++
 
-
-#include <iostream>
 #include <string>
 #include <algorithm>
 #include <vector>
@@ -478,9 +147,9 @@ int main ()
     for_each(vv.begin(), vv.end(), printline<int>);
 }
 
-#+END_EXAMPLE
+#+END_SRC
 
-Another example: [[https://github.com/NelsonBilber/cpp.variadic.templates][Source Code]]
+*Another example:* [[https://github.com/NelsonBilber/cpp.variadic.templates][Source Code]]
 
 
 *** Move semantics 

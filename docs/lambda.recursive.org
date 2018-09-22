@@ -1,0 +1,97 @@
+#+TITLE: Lambda recursive
+#+AUTHOR: Nelson Rodrigues
+
+" ... You can store it in a variable and reference that variable (although you cannot declare the type of that variable
+as auto, you would have to use an std::function object instead) ... "
+
+*Source code from*: 
+https://stackoverflow.com/questions/14531993/can-lambda-functions-be-recursive/14532044
+
+http://cpptruths.blogspot.com/2013/10/creating-recursive-lambdas-and.html
+
+http://www.riptutorial.com/cplusplus/example/8508/recursive-lambdas
+
+
+
+
+** *this vs this in C++
+
+
+this is a pointer, and *this is a dereferenced pointer.
+
+** source code example
+
+If you had a function that returned this, it would be a pointer to the current object, while a function that returned *this would be a "clone" of the current object, allocated on the stack -- unless you have specified the return type of the method to return a reference.
+
+*source code:	*
+https://stackoverflow.com/questions/2750316/this-vs-this-in-c#2750322
+
+
+#+BEGIN_EXAMPLE C++
+
+*/
+
+#include <iostream>
+#include <functional>
+
+using namespace std;
+
+std::function<int(int)> create() {
+	int foo = 20;
+	std::function<int(int)> f = [=](int n) mutable {
+         std::function<int(int)> recurse = [&](int n) { 
+            	foo = 10;
+            	return (n<=2)? 1 : recurse(n-1) + recurse(n-2); 
+         	};  
+			return recurse(n);
+	};  
+  	return f;
+}
+
+template < class F >
+struct y_combinator {
+	F f;
+	// forward operator()
+	template <class... Args>
+	decltype(auto) operator()(Args&&... args) const {
+        	return f(*this, std::forward<Args>(args)...);
+    }
+};
+
+//helper functions for deduce thr type of th lamnda
+template < class F >
+y_combinator< std::decay_t <F>> make_y_combinator (F&& f){
+	return {std::forward<F>(f)};
+};
+	
+int main()
+{
+	std::function<int (int)> factorial = [&] (int i) 
+	{ 
+		return (i == 1) ? 1 : i * factorial(i - 1); 
+	};
+	
+	//ERROR
+	//When the function ends, so does the fib object and consequently, the reference inside the closure becomes invalid
+	std::function<int(int)> fib = [&fib](int n)
+  	{
+		return (n <= 2)? 1 : fib(n-1) + fib(n-2);
+  	};
+	
+	cout << factorial(5) << endl;
+	cout << fib(10) << endl;	
+	auto a = create();
+	cout << a(10) << endl;
+	
+	auto gcd = make_y_combinator(
+		[](auto&& gcd, int a, int b){
+			return b == 0 ? a : gcd(b, a%b);
+  		}
+	);
+	
+	
+	return 0;
+}
+
+#+END_EXAMPLE
+

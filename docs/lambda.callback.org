@@ -1,0 +1,130 @@
+#+TITLE: Using lambda as callback 
+#+AUTHOR: Nelson Rodrigues
+
+https://gist.github.com/4poc/3155832
+http://bannalia.blogspot.com/2016/07/passing-capturing-c-lambda-functions-as.html
+https://embeddedartistry.com/blog/2017/1/26/c11-improving-your-callback-game
+
+# this blog has a complex example "Type safe callbacks (full example, supports capturing lambdas)"
+http://meh.schizofreni.co/programming/magic/2013/01/23/function-pointer-from-lambda.html
+
+# functors in c++
+https://stackoverflow.com/questions/356950/what-are-c-functors-and-their-uses
+
+# function pointers in C
+https://www.geeksforgeeks.org/function-pointer-in-c/
+
+
+
+#+BEGIN_SRC C++
+
+#include <iostream>
+#include <vector>
+#include <functional>
+
+//mix old C code just for concept proof
+#include <stdio.h>
+
+using namespace std;
+
+//class with callbacks
+class WorkingClass
+{
+public:
+	typedef const std::function<void(int)> handler_t;
+	
+	void AddHandler(handler_t& h)
+	{
+		handlerList.push_back(&h);
+	}
+	
+	void DoStuff()
+	{
+		for(auto& handler: handlerList)
+		{
+			(*handler)(42);
+			(*handler)(23);
+		}
+	}
+	
+private:
+	std::vector<handler_t*> handlerList;
+	
+};
+
+//using legacy coe
+void do_something( void(*callback)(void*), void* callback_arg)
+{
+	callback(callback_arg);
+}
+
+//tradicional functor in c++ (overload operator() )
+//used for: e.g.:function with state
+struct AddF
+{
+	AddF(int x): x(x) {}
+	int operator()(int y) const { return x + y; }
+private:
+	int x; 
+};
+
+
+/* tradicional functors in Plain C */
+void fun(int a)
+{
+	printf("value %d", a);
+}
+
+int main()
+{
+	/* Exercise 01 */
+	WorkingClass wc;
+	wc.AddHandler([&](int num){ cout << "A: " << num << endl; } );
+	wc.AddHandler([&](int num){ cout << "B: " << num << endl; } );
+	wc.DoStuff();			  
+	
+	/* Exercise 02 */
+	int num_callbacks = 0;
+	auto callback =[&](){
+		std::cout << "callback called " << ++num_callbacks << " times \n";
+	};
+	
+	auto thunk = [](void* arg){
+		(*static_cast<decltype(callback)*>(arg))();
+	};
+	
+	do_something(thunk, &callback);
+	
+	/* Exercise 03 */
+	auto lambda = [](int a, float b) {
+		std::cout << "a: " << a << std::endl;
+		std::cout << "b: " << b << std::endl;
+	};
+	//function being a raw pointer
+	auto function = static_cast<void(*)(int, float)>(lambda);
+	function(1, 2.13);
+	//function begin a std::function
+	auto function2 = static_cast<std::function<void(int, float)>>(lambda);
+	function2(1, 2.13);
+
+
+	
+	// C++ tradicional functors
+	AddF ff(3);
+	int fff = ff(7);
+	std::cout  << fff << std::endl;
+
+
+	
+	// C tradiciona function pointer	
+	// return type( *name of var )(args01,args02, ...)	
+	void(*fun_ptr)(int) = &fun;
+	/* The above line is equivalent of following two 
+	void (*fun_ptr)(int); 
+	fun_ptr = &fun;*/
+	(*fun_ptr)(10); // de-referencing a function pointer and add variables
+	
+	return 0;
+}
+
+#+END_SRC

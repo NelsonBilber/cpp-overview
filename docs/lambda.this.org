@@ -1,0 +1,99 @@
+#+TITLE: Lambda capture (*this)
+#+AUTHOR: Nelson Rodrigues
+
+
+C++ lambda capture this by value
+https://stackoverflow.com/questions/33575563/c-lambda-capture-this-vs-capture-by-reference
+
+*source code from:*
+https://crascit.com/2015/03/01/lambdas-for-lunch/
+
+
+
+#+begin_src C++
+
+
+/*
+
+struct S { void f(int i); };  
+
+void S::f(int i) {  
+    [&, i]{};      // OK  
+    [&, &i]{};     // ERROR: i preceded by & when & is the default  
+    [=, this]{};   // ERROR: this when = is the default  
+    [=, *this]{ }; // OK: captures this by value. See below.
+    [i, i]{};      // ERROR: i repeated  
+}
+
+"... he this pointer may be captured by value by specifying *this in the capture clause. Capture by value means that the entire closure, which is the anonymous function object that encapulates the lambda expression, is copied to every call site where the lambda is invoked. Capture by value is useful when the lambda will execute in parallel or asynchronous operations, especially on certain hardware architectures such as NUMA...."
+
+https://docs.microsoft.com/en-us/cpp/cpp/lambda-expressions-in-cpp?view=vs-2017
+  
+*/
+
+#+end_src
+
+#+begin_src C++
+
+#include <iostream>
+#include <vector>
+#include <algorithm>
+
+using namespace std;
+
+class Foo
+{
+    	int x;
+public:
+    	Foo() : x(10) {}
+
+	/*
+	Capturing the this pointer is particularly convenient and 
+	lambdas often make use of this capability. Note that capturing 
+	this by reference doesn’t really make sense (you can’t change 
+	its value), so it should always appear in a capture statement 
+	as capturing by value.
+
+	[this] - captures by value, same result as [=]
+
+	*/
+	void bar()
+    	{
+       		 // Increment x every time we are called
+        	auto lam = [this](){ return ++x; };
+        	std::cout <<"lam () => " <<lam() << std::endl;
+    	}
+};
+
+int main()
+{
+	// [captures] (parameters) -> returnType {body}
+	auto fun = [](double t){ return t*t;};
+	cout << "square(5) = " << fun(5) << endl;
+	
+	vector<int> v {23, -5, -2 , 16, 20};
+	auto c = count_if(v.begin(), v.end(), 
+			     [](int i){ return i == ((i/5)*			     
+	cout << c << endl;
+	
+	int x = 5;	
+	auto copyLambda = [x](){ return x; };
+	auto refLambda	 = [&x](){ return x; };
+	
+	std::cout << copyLambda() << std::endl;
+	std::cout << refLambda()  << std::endl;
+	x = 7;
+	std::cout << copyLambda() << std::endl;
+	std::cout << refLambda()  << std::endl;
+	
+	Foo foo;
+	foo.bar(); // Outputs 11
+	foo.bar(); // Outputs 12
+	
+	int mm = 5;	
+	auto inc = [&mm](){ return ++mm;};	
+	cout << "inc() = "<< inc() << endl; 
+ }
+
+
+#+end_src
