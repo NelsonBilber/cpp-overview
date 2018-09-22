@@ -16,10 +16,13 @@ Next link presents "just a simple" example how can be used in C++.
 ** other examples
 
 
-object a calls a function on object b 
-a->b
-object a class a function on object b and then b calls an function on object a
-a->b->a
+object A calls a function on object B 
+
+A->B
+
+object A calls a function on object B and then B calls an function on object A
+
+A->B->A
  
 [[https://github.com/NelsonBilber/cpp.functional][Call Methods on other Objects]]
 
