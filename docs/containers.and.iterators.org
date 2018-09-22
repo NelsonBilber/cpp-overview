@@ -7,7 +7,7 @@
 
 *Text extracted from book*: "C++ 17 STL Cookbook"
 
-**** Summary
+*** Summary
 
 *Types of containers*
 
@@ -22,7 +22,7 @@ The standard containers implement structures that are commonly used in our progr
 
 The C++ container library categorizes containers into four types:
 
-***** Sequence containers
+**** Sequence containers
 
 Sequence containers are used for data structures that store objects of the same type in a linear manner.
 The STL SequenceContainer types are:
@@ -33,7 +33,7 @@ The STL SequenceContainer types are:
 - deque provides a double-ended queue, where elements can be added to the front or back of the queue.
 While std::string is not included in most container lists, it does in fact meet the requirements of a SequenceContainer.	
 
-***** Sequence container adapters
+**** Sequence container adapters
 
 Container adapters are a special type of container class. They are not full container classes on their own, but wrappers around other container types (such as a vector, deque, or list). These container adapters encapsulate the underlying container type and limit the user interfaces accordingly.
 Let's consider std::stack. std::stack is a container that enforces a LIFO-type data structure. Here's the declaration of std::stack:
@@ -42,7 +42,7 @@ The standard container adapters are:
 - *queue* provides a FIFO data structure, queue can be implemented on top of deque or list
 - *priority_queue* provides a priority queue, which allows for constant-time lookup of the largest element (by default), priority_queue can be implemented on top of deque or vector
 
-***** Associative containers
+**** Associative containers
 
 Associative containers provide sorted data structures that provide a fast lookup (O(log n) time) using keys.
 The STL AssociativeContainer types are can be divided in two ways: containers which require unique keys, and those which allow multiple entries using the same key.
@@ -54,7 +54,7 @@ The STL AssociativeContainer types are can be divided in two ways: containers wh
 - multimap is a collection of key-value pairs, sorted by keys
 - Note that set and map are typically implemented using red-black trees.
 
-***** Unordered associative containers
+**** Unordered associative containers
 
 Unordered associative containers provide unsorted data structures that can be accessed using a hash. Access times are O(n) in the worst-case, but much faster than linear time for most operations.
 For all STL UnorderedAssociativeContainer types, a hashed key is used to access the data. Similar to the AssociativeContainer, the standard types are split between those that require unique keys, and those that do not:
@@ -65,8 +65,7 @@ For all STL UnorderedAssociativeContainer types, a hashed key is used to access 
 - unordered_multiset is a collection of keys, hashed by keys
 - unordered_multimap is a collection of key-value pairs, hashed by keys
 
-
-***** Hashtables
+**** Hashtables
 
 C++ doesn't have natively a container called "hash" they are called unorder_map or unorder_set, under the wood they are hastables
 
@@ -75,7 +74,8 @@ C++ doesn't have natively a container called "hash" they are called unorder_map 
 - unordered_map
 - unordered_multimap
 
-**** Standard Container Thread Safety
+
+*** Standard Container Thread Safety
 
 I want to share with you some relevant points regarding container thread safety, as many embedded systems will likely require sharing objects across threads.
 All container functions are safe to be called concurrently on different objects of the same container type.
@@ -131,6 +131,7 @@ to. If they are being read from, the value will be undefined.
 other categories at the same time, it is a mutable iterator. It can be
 read from and written to. If we obtain an iterator from a non-const
 container instance, it will usually be of this kind.
+
 
 *** Iterators Adapters
 
@@ -246,14 +247,14 @@ https://baptiste-wicht.com/posts/2012/12/cpp-benchmark-vector-list-deque.html
 
 ** Important Notes
 
-****  Vector should be used by default as the (sequence) container:
+***  Vector should be used by default as the (sequence) container:
 
 - It is more (space and time) efficient than other STL containers.
 - It is more convenient and safer than primitive array.
 - automatic memory management
 - rich interface
 
-**** Associative containers properties
+*** Associative containers properties
 
 The underlying data structure is a balanced search tree:
 - logarithmic access time
