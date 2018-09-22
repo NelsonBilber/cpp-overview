@@ -1,72 +1,21 @@
 #+Title: C++ Basics 
 #+AUTHOR: Nelson Rodrigues
-#+TOC: headlines 5
-
-**** RAII 
-
-[[https://github.com/NelsonBilber/cpp.RAII][Source Code]]
 
 
-**** Containers 
-
-[[https://github.com/NelsonBilber/cpp.containers][Source Code]]
-
-
-**** Cast 
-
-[[https://github.com/NelsonBilber/cpp.cast][Source Code]]
-
-
-**** Smart pointers 
-
-[[https://github.com/NelsonBilber/cpp.smartpointers][Source Code]]
-
-
-**** STL 
-
-[[file:std_accumulate.org][std::accumulate]]
-
-[[file:std_transform.org][std::transform]]
-
-
-****** Other examples
-
-Some source code examples for how to use STL utils
-
-[[https://github.com/NelsonBilber/cpp.stl][Source Code]]
-
-
-**** Exceptions
-
-[[file:exceptions.org][exceptions]]
-
-
-**** Object Oriented Programming 
-
-[[https://github.com/NelsonBilber/cpp.oop][Source Code]]
-
-
-**** The rule of three/five/zero 
-
-[[https://github.com/NelsonBilber/cpp.movesemantics][Source Code]]
-
-
-**** Translation Unit
-
-[[file:translation.unit.org][Translation Unit]]
-
-**** Internal linking vs External linking
-
-[[file:linking.org][Internal and External Linking]]
-
-**** Name Mangling vs Virtual Functions vs Function Overloading
-
-[[file:name.mangling.org][Name Mangling]]
-
-**** void*
-
-[[file:void.ptr.org][void*]]
-
-**** Deep copy vs shallow copy
-
-[[file:deepshallowcopy.org][Deep and shallow copy]]
+| Topic                                         | Description                                                                              |
+|-----------------------------------------------+------------------------------------------------------------------------------------------|
+| RAII                                          | More information ...  [[https://github.com/NelsonBilber/cpp.RAII][Source Code]]          |
+| Containers                                    | More information ...  [[https://github.com/NelsonBilber/cpp.containers][Source Code]]    |
+| Cast                                          | More information ...  [[https://github.com/NelsonBilber/cpp.cast][Source Code]]          |
+| Smart Pointers                                | More information ...  [[https://github.com/NelsonBilber/cpp.smartpointers][Source Code]] |
+| std::transform                                | More information ...  [[file:std_transform.org][std::transform]]                         |
+| std::accumulate                               | More information ...  [[file:std_accumulate.org][std::accumulate]]                       |
+| STL utils                                     | More information ...  [[https://github.com/NelsonBilber/cpp.stl][Source Code]]           |
+| Exception                                     | More information ...  [[file:exceptions.org][exceptions]]                                |
+| Object Oriented programming                   | More information ...  [[https://github.com/NelsonBilber/cpp.oop][Source Code]]           |
+| The Rule of Three/five/zero                   | More information ...  [[https://github.com/NelsonBilber/cpp.movesemantics][Source Code]] |
+| Translation Units                             | More information ...  [[file:translation.unit.org][Translation Unit]]                    |
+| Internal linking vs External Linking          | More information ...  [[file:linking.org][Internal and External Linking]]                |
+| Name mangling vs Virtual Function Overloading | More information ...  [[file:name.mangling.org][Name Mangling]]                          |
+| void*                                         | More information ...  [[file:void.ptr.org][void*]]                                       |
+| Deep Copy and Shallow copy                    | More information ...  [[file:deepshallowcopy.org][Deep and shallow copy]]                |
