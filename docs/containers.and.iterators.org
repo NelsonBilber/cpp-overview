@@ -92,7 +92,7 @@ For operating on objects of the same type, the following guidelines are helpful 
 - In general, common-sense concurrency rules apply. If you are modifying the container in multiple threads, you will need to protect that container to prevent concurrent access.
 
 
-* TODO Iterators
+* Iterators
 
 Text from book "C++ 17 STL Cookbook"
 
@@ -102,91 +102,113 @@ Text from book "C++ 17 STL Cookbook"
 the values they point to. Once they are incremented, the last value they
 pointed to has been invalidated during the incrementation. This means
 that it is not possible to iterate over such a range multiple times.
-TheÂ std::istream\_iterator is an example for this category.
+The std::istream_iterator is an example for this category.
 
-*Forward iterator* Forward iterators are the same as input iterators,
-but they differ in that regard that the ranges they represent can be
-iterated over multiple times. TheÂ std::forward\_list Â iterators are an
-example ofÂ that. Such a list can only be iterated over forward , not
+source code from: http://www.cplusplus.com/reference/iterator/istream_iterator/
+
+#+BEGIN_SRC C++
+
+// istream_iterator example
+#include <iostream>     // std::cin, std::cout
+#include <iterator>     // std::istream_iterator
+
+int main ()
+{
+	 double value1, value2;
+ 	 std::cout << "Please, insert two values: ";
+
+  	std::istream_iterator<double> eos;              // end-of-stream iterator
+  	std::istream_iterator<double> iit (std::cin);   // stdin iterator
+
+  	if (iit!=eos)
+	{ 
+		value1=*iit;
+	}
+ 	++iit;
+  	
+	if (iit!=eos)
+	{ 
+		value2=*iit;
+	}
+  	std::cout << value1 << "*" << value2 << "=" << (value1*value2) << '\n';
+
+  	return 0;
+}
+
+#+END_SRC
+
+*Forward iterator* Forward iterators are the same as input iterators,but they differ in that regard that the ranges they represent can be
+iterated over multiple times. The  std::forward_list  iterators are an example of that. Such a list can only be iterated over forward , not
 backward, but it can be iterated over as often as we like to.
 
-*Bidirectional iterator* The bidirectional iterator, as the name
-suggests, can be incremented and decremented, in order to iterate
-forward orÂ backward. The iterators ofÂ std::list , std::set , and
-std::map , for example, support that.
+*Bidirectional iterator* The bidirectional iterator, as the name suggests, can be incremented and decremented, in order to iterate
+forward or backward. The iterators of std::list , std::set , and std::map , for example, support that.
 
-*Random access iterator* Random access iterators allow jumping over
-multiple values at once, instead of single-stepping. This is the case
-for iterators of std::vector and std::deque .
+*Random access iterator* Random access iterators allow jumping over multiple values at once, instead of single-stepping. This is the case
+for iterators of std::vector and std::deque.
 
-*Contiguous iterator* This category specifies all of the aforementioned
-requirements, plus the requirement that the data that is being iterated
-through lies in contiguous memory, like it does in an array, or
-std::vector .
+*Contiguous iterator* This category specifies all of the aforementioned requirements, plus the requirement that the data that is being iterated
+through lies in contiguous memory, like it does in an array, or std::vector.
 
-*Output iterator* Output iterators are detached from the other
-categories. This is because an iterator can be a pure output iterator,
-which can only be incremented and used to write to the data it points
-to. If they are being read from, the value will be undefined.
+*Output iterator* Output iterators are detached from the other categories. This is because an iterator can be a pure output iterator,
+which can only be incremented and used to write to the data it points to. If they are being read from, the value will be undefined.
 
-*Mutable iterator* If an iterator is an output iterator and one of the
-other categories at the same time, it is a mutable iterator. It can be
-read from and written to. If we obtain an iterator from a non-const
-container instance, it will usually be of this kind.
+*Mutable iterator* If an iterator is an output iterator and one of the other categories at the same time, it is a mutable iterator. It can be
+read from and written to. If we obtain an iterator from a non-const container instance, it will usually be of this kind.
+
+*** Resume
+
+
+| Iterator Category | Ability                         | Providers                                                |
+|-------------------+---------------------------------+----------------------------------------------------------|
+| Input iterator    | Reads forward                   | istream                                                  |
+| Output iterator   | Writes forward                  | ostream, inserter                                        |
+| Forward iterator  | Reads/writes forward            | forward_list, unordered_[multi]set, unordered_[multi]map |
+| Bidirectional it. | Reads/writes forward/backward   | list, [multi]set, [multi]map                             |
+| Random access it. | Reads/writes with random access | vector, deque string, array                              |
+|                   |                                 |                                                          |
+
+
+*from source:*
+https://stackoverflow.com/questions/5211914/types-of-iterator-output-vs-input-vs-forward-vs-random-access-iterator
 
 
 ** Iterators Adapters
 
-*std::back\_insert\_iterator* The back\_insert\_iterator can be wrapped
-aroundÂ std::vector , std::deque , std::list , and so on. It will call
-the container's push\_back method, which inserts the new itemÂ past the
-existing items. If the container instance is not large enough, it will
+*std::back_insert_iterator* The back_insert_iterator can be wrapped around std::vector , std::deque , std::list , and so on. It will call
+the container's push_back method, which inserts the new item past the existing items. If the container instance is not large enough, it will
 be grown automatically.
 
-*std::front\_insert\_iterator* The front\_insert\_iterator does exactly
-the same thing as back\_insert\_iterator , but it calls the container's
-push\_front method, which inserts the new item before all the existing
-items. Note that for a container like std::vector , this means that all
-the existing items need to be moved one slot further in order to leave
-space for the new item at the front.
+*std::front_insert_iterator* The front_insert_iterator does exactly the same thing as back_insert_iterator , but it calls the container's
+push_front method, which inserts the new item before all the existing items. Note that for a container like std::vector , this means that all
+the existing items need to be moved one slot further in order to leave space for the new item at the front.
 
-*std::insert\_iterator* This iterator adapterÂ is similar to the other
-inserters, but is able to insert new items between existing ones. The
-std::inserter helper function which constructs such a wrapper takes twoÂ
-arguments. The first argument is the container and the second argument
-is an iterator thatÂ points to the position where new items shall be
-inserted.
+*std::insert_iterator* This iterator adapter is similar to the other inserters, but is able to insert new items between existing ones. The
+std::inserter helper function which constructs such a wrapper takes two arguments. The first argument is the container and the second argument
+is an iterator that points to the position where new items shall be inserted.
 
-*std::istream\_iterator* The istream\_iterator is another very handy
-adapter. It can be used with any std::istream object (which can be the
-standard input or files for example)Â and will try to parse the input
-from that stream object according to the template parameter it was
-instantiated with. In this advance how long the stream is. That leaves
-the question, where will the end iterator point toÂ if we do not know
-where the stream's end is? The way this worksÂ is that the iterator
-knows when it reaches the end of the stream. When it is compared to the
-end iterator, it will effectively not really compare itself with the end
-iterator but return if the stream has any tokens left . That's why the
+*std::istream_iterator* The istream_iterator is another very handy adapter. It can be used with any std::istream object (which can be the
+standard input or files for example and will try to parse the input from that stream object according to the template parameter it was
+instantiated with. In this advance how long the stream is. That leaves the question, where will the end iterator point to if we do not know
+where the stream's end is? The way this works is that the iterator knows when it reaches the end of the stream. When it is compared to the
+end iterator, it will effectively not really compare itself with the end iterator but return if the stream has any tokens left . That's why the
 end iterator constructor does not take any arguments.
 
-*std::ostream\_iterator* The ostream\_iterator is the same thing as the
-istream\_iterator , but it works the other way around: It doesn't take
-tokens from an input stream--it pushes tokens into an output stream.
-Another difference to istream\_iterator is that its constructor takes a
-second argument, which is a string that shall be pushed into the output
-stream after each item. That is usefulÂ because this way we can print a
-separatingÂ "," Â or a new line after each item.
+*std::ostream_iterator* The ostream_iterator is the same thing as the istream_iterator , but it works the other way around: It doesn't take
+tokens from an input stream--it pushes tokens into an output stream. Another difference to istream_iterator is that its constructor takes a
+second argument, which is a string that shall be pushed into the output stream after each item. That is usefulÂ because this way we can print a
+separating "," or a new line after each item.
 
 
-* TODO When to use it ?
+* When to use it ?
 
-*Nice Flowchart !!!*
+*** Nice Flowchart !!!
 https://stackoverflow.com/questions/471432/in-which-scenario-do-i-use-a-particular-stl-container
 
-*Complexity Big-Oh*
+*** Complexity Big-Oh
 http://john-ahlgren.blogspot.com/2013/10/stl-container-performance.html
 
-*Scott Meyers*
+*** Scott Meyers
 Look at Effective STL by Scott Meyers. It's good at explaining how to use the STL.
 
 If you want to store a determined/undetermined number of objects and you're never going to delete any, then a vector is what you want. It's the default replacement for a C array, and it works like one, but doesn't overflow. You can set its size beforehand as well with reserve().
@@ -199,7 +221,8 @@ If you have a lot of key-value pairs, and you want to sort them by key, then a m
 
 It's not in the STL, but it is in the TR1 update to the STL: if you have a lot of key-value pairs that you're going to look up by key, and you don't care about their order, you might want to use a hash - which is tr1::unordered_map. I've used it with Visual C++ 7.1, where it was called stdext::hash_map. It has a lookup of O(1) instead of a lookup of O(log n) for map.
 
-*Stack overflow*
+*** Stack overflow
+
 It all depends on what you want to store and what you want to do with the container. Here are some (very non-exhaustive) examples for the container classes that I tend to use most:
 vector: Compact layout with little or no memory overhead per contained object. Efficient to iterate over. Append, insert and erase can be expensive, particularly for complex objects. Cheap to find a contained object by index, e.g. myVector[10]. Use where you would have used an array in C. Good where you have a lot of simple objects (e.g. int). Don't forget to use reserve() before adding a lot of objects to the container.
 list: Small memory overhead per contained object. Efficient to iterate over. Append, insert and erase are cheap. Use where you would have used a linked list in C.
@@ -207,12 +230,10 @@ set (and multiset): Significant memory overhead per contained object. Use where 
 map (and multimap): Significant memory overhead per contained object. Use where you want to store key-value pairs and look up values by key quickly.
 The flow chart on the cheat sheet suggested by zdan provides a more exhaustive guide.
 
-*SGI*
+*** SGI
 
 http://www.sgi.com/tech/stl/complexity.html
 http://www.sgi.com/tech/stl/table_of_contents.html
-
-From complexity.html:
 
 Fundamentally, it is difficult to define the notion of asymptotic algorithm complexity precisely for real computer hardware instead of an abstract machine model. Thus we settle for the following guidelines:
 
@@ -224,12 +245,16 @@ If operations are more expensive than assumed by a function F in the current STL
 
 To make this precise, assume F is specified to use time f(m) for input of size m. F uses operations Gk, with specified running times gk(n) on input size n. If F is used in a context in which each Gk is slower than expected by at most a factor h(n), then F slows down by at most a factor h(m). This holds because none of the current algorithms ever apply the operations Gk to inputs significantly larger than m.
 
+
 http://www.cs.northwestern.edu/~riesbeck/programming/c++/stl-summary.html 
+
 http://landenlabs.com/code/perf-stl/perf-stl.html
+
 https://baptiste-wicht.com/posts/2012/12/cpp-benchmark-vector-list-deque.html
 
 
-*General Rules of Thumb*
+*** General Rules of Thumb
+
 **** Use sequential containers when you need to access elements by position
 - Use std:vector as your default sequential container, especially as an alternative to built-in arrays
 - If size is known in advance, use std::array instead of a built-in array
@@ -238,9 +263,11 @@ https://baptiste-wicht.com/posts/2012/12/cpp-benchmark-vector-list-deque.html
 - Do not use std::list if you need random access to objects
 - Prefer std::vector over std::list if your system uses a cache
 - std::string is almost always better than a C-string
+
 **** Use associative containers when you need to access elements by key
 - For key/value pair, default to std::unordered_map, or if element order matters, std::map
 - If you need multiple entries for the same key, use std::unordered_multimap, or if element order matters, std::multimap
+
 **** Memory allocation may also be a factor in your decision. Here are the general rules of thumb for how the different sequential containers are storing memory:
 - std:vector, std::array, and std::string store memory contiguously and are compatible with C-style APIs
 - std::deque allocates memory in chunks
@@ -249,14 +276,15 @@ https://baptiste-wicht.com/posts/2012/12/cpp-benchmark-vector-list-deque.html
 
 * Important Notes
 
-**  Vector should be used by default as the (sequence) container:
+***  Vector should be used by default as the (sequence) container:
 
 - It is more (space and time) efficient than other STL containers.
 - It is more convenient and safer than primitive array.
 - automatic memory management
 - rich interface
 
-** Associative containers properties
+
+*** Associative containers properties
 
 The underlying data structure is a balanced search tree:
 - logarithmic access time
