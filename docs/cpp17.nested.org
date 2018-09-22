@@ -1,0 +1,33 @@
+#+TITLE: nested namespaces
+#+AUTHOR: Nelson Rodrigues
+
+
+*source from:*
+http://www.nuonsoft.com/blog/2017/08/01/c17-nested-namespaces/
+
+
+#+BEGIN_EXAMPLE C++
+
+// Before C++17
+
+namespace Core {
+    namespace Graphics {
+        namespace Rendering {
+            class PostProcessor
+            {
+            };
+        }
+    }
+}
+
+// After C++17
+
+namespace Core::Graphics::Rendering {
+    class PostProcessor
+    {
+    };
+}
+
+
+#+END_EXAMPLE
+

@@ -1,0 +1,88 @@
+#+TITLE: string_view
+#+AUTHOR: Nelson Rodrigues
+
+
+A wrapper/view from a tradiciona std::string.
+
+*source code from*: https://skebanga.github.io/string-view/
+
+
+"... C++17 makes it easy by introducing a new type called std::string_view. From now on, if you are writing a function that accepts a string,
+use an std::string_view as parameter type. No need to use an std::string_view reference. A string_view is very cheap to copy, so it’s
+perfectly fine to pass by value. Basically, a string_view just contains a pointer to a string, and its length. A string_view parameter
+accepts any kind of string, such as a C++ std::string, a C-style const char* string, and a string literal, all without any copying involved! ..."
+
+*source from:*
+http://www.nuonsoft.com/blog/2018/06/06/c17-stdstring_view/
+
+
+#+BEGIN_EXAMPLE C++
+
+#include <iostream>
+#include <string_view>
+
+using namespace std;
+
+void* operator new(std::size_t n)
+{
+    	std::cout << "[allocating " << n << " bytes]\n";
+    	return malloc(n);
+}
+
+bool compare(const std::string& s1, const std::string& s2)
+{
+    	if (s1 == s2)
+	{
+    	    return true;
+	}
+    	std::cout << '\"' << s1 << "\" does not match \"" << s2 << "\"\n";
+    	return false;
+}
+
+bool compare_v2(std::string_view s1, std::string_view s2)
+{
+    	if (s1 == s2)
+	{
+    	    return true;
+	}
+    	std::cout << '\"' << s1 << "\" does not match \"" << s2 << "\"\n";
+    	return false;
+}
+
+
+void processString(string_view myString)
+{
+   	 cout << myString; if (myString.size() >= 4)
+   	 {
+   	     cout << "   (Substring: " << myString.substr(2, 2) << ")";
+   	 }
+   	 cout << endl;
+}
+
+int main()
+{
+    	string str = "this is my input string";
+
+	compare(str, "this is the first test string");
+    	compare(str, "this is the second test string");
+    	compare(str, "this is the third test string");
+	
+	cout << "-------------------------------------------" << endl;
+	
+	compare_v2(str, "this is the first test string");
+    	compare_v2(str, "this is the second test string");
+    	compare_v2(str, "this is the third test string");
+	
+	cout << "-------------------------------------------" << endl;
+	
+	string myString1 = "Hello";
+    	const char* myString2 = "C++";
+    	processString(myString1);  // C++ string
+    	processString(myString2);  // C-style string
+    	processString("World!");   // String literal
+
+    	return 0;
+}
+
+
+#+END_EXAMPLE

@@ -1,0 +1,79 @@
+#+TITLE: Structure unbinding
+#+AUTHOR: Nelson Rodrigues
+
+
+*from source code:*
+https://skebanga.github.io/structured-bindings/
+
+#+BEGIN_EXAMPLE C++
+
+
+#include <iostream>
+#include <tuple>
+#include <string>
+#include <vector>
+#include <map>
+
+struct MyTuple {
+	int a; 
+	std::string b;
+	double c;
+};
+
+std::map<std::string, int> get_map()
+{
+    return
+	    {
+	        { "hello", 1 },
+        	{ "world", 2 },
+        	{ "it's",  3 },
+        	{ "me",    4 },
+	    };
+}
+
+int main()
+{
+	
+	 auto tuple = std::make_tuple(1,"3",5.23);
+	 int a;
+	 std::string b; 
+	 double c;
+	 
+	 std::tie ( a, b, c ) = tuple;	     
+	 std::cout << a << " - " << b << " - " << c << std::endl;    
+	 
+	 // Same code with C++17 Syntax
+	 
+	 auto [d,e,f] = tuple ;	    
+	 std::cout << d << " - " << e << " - " << f << std::endl;    
+	 
+	 //obtain references
+	 auto& [g,h,j] = tuple ;     
+	 g++;
+	 
+	 std::cout << g << " - " << h << " - " << j << std::endl;    
+	 
+	 // with structs    
+	 MyTuple tp {10, "my tuple", 102.112};
+	 auto [k,l,m] = tp;
+	 
+	 std::cout << k << " - " << l << " - " << m << std::endl;    
+	 
+	 MyTuple tp2 {11, "my tuple 2", 5.112};
+	 std::vector<MyTuple> v {tp, tp2};
+	 
+	 for (const auto& [a, b, c] : v )
+	 {
+		 std::cout << a << " - " << b  << std::endl;    
+	 }
+	 
+	 for (auto&& [ k, v ] : get_map())
+	 {
+		std::cout << "k=" << k << " v=" << v << '\n';
+	 }
+	 
+	 return 0;	     
+}
+
+
+#+END_EXAMPLE

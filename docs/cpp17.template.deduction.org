@@ -1,0 +1,54 @@
+#+TITLE: Template deduction
+#+AUTHOR: Nelson Rodrigues
+
+
+
+#+BEGIN_EXAMPLE C++
+
+/*
+
+" ... What are template deduction guides in C++17?
+Template deduction guides are patterns associated with a template class that tell the compiler how to translate a set of parameter (and their types) into template arguments.
+
+The simplest example is that of std::vector and its constructor that takes an iterator pair.
+
+template<typename Iterator>
+void func(Iterator first, Iterator last)
+{
+  vector v(first, last);
+}
+The compiler needs to figure out what vector<T>’s T type will be. We know what the answer is; T should be typename std::iterator_traits<Iterator>::value_type. But how do we tell the compiler without having to type vector<typename std::iterator_traits<Iterator>::value_type>? ..."
+
+https://isocpp.org/blog/2017/09/quick-q-what-are-template-deduction-guides-in-cpp17
+
+source code from;
+
+Template argument deduction for class templates
+Automatic template argument deduction much like how it's done for functions, but now including class constructors.
+
+template <typename T = float>
+struct MyContainer {
+  T val;
+  MyContainer() : val() {}
+  MyContainer(T val) : val(val) {}
+  // ...
+};
+MyContainer c1{ 1 }; // OK MyContainer<int>
+MyContainer c2; // OK MyContainer<float>
+
+
+*/
+
+
+#+END_EXAMPLE
+
+
+
+
+** References:
+
+https://github.com/AnthonyCalandra/modern-cpp-features/blob/master/README.md#template-argument-deduction-for-class-templates
+
+https://blog.tartanllama.xyz/deduction-for-class-templates/
+
+http://www.open-std.org/jtc1/sc22/wg21/docs/papers/2016/p0091r3.html

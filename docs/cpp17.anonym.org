@@ -1,0 +1,83 @@
+#+TITLE: Anonymous namespaces
+#+AUTHOR: Nelson Rodrigues
+
+**** Anonymous namespaces
+
+#+BEGIN_EXAMPLE C++
+/*  Unnamed/anonymous namespaces vs. static functions
+
+https://stackoverflow.com/questions/154469/unnamed-anonymous-namespaces-vs-static-functions
+
+--------------------------------------------------------------------------------------------------------
+
+Anonymous Namespaces
+
+In C++, there exists another way to declare one or more symbols to have internal linkage: anonymous namespaces. Such a namespace ensures that the symbols declared inside it are visible only within the current translation unit. It is, in essence, just a way to declare many symbols as static. In fact, for a while, the static keyword for the use of declaring a symbol to have internal linkage was deprecated in favor of anonymous namespaces. However, it was recently undeprecated, because it is useful to declare a single variable or function to have internal linkage. There are also a few minor differences which I won’t go into here.
+
+In any case, this:
+
+namespace { int variable = 0; }
+does (almost) the same thing as this:
+
+static int variable = 0;
+
+http://www.goldsborough.me/c/c++/linker/2016/03/30/19-34-25-internal_and_external_linkage_in_c++/
+
+-------------------------------------------------------------------------------------------------------------------
+C++17 might simplify nested namespace definition:
+
+namespace A::B::C {
+}
+is equivalent to
+
+namespace A { namespace B { namespace C {
+} } }
+
+https://stackoverflow.com/questions/11358425/is-there-a-better-way-to-express-nested-namespaces-in-c-within-the-header
+
+*/
+
+#include <iostream>
+ 
+namespace A::B::C {
+class Test{
+public:
+	Test() = default;
+};
+}
+
+
+int main()
+{
+	A::B::C::Test t {};
+	return 0;
+}
+
+
+/* 
+
+How to use a anonymous namespaces to avoid the use of const static int = 42;
+
+on *.hpp file 
+
+namespace TempDefinitions
+{
+	const int32 CONTROLLER_ID_NOT_FOUND = -1;
+}
+
+
+On *.cpp file set up a variable for
+
+namespace
+{
+	const int32 DEFAULT_ID = TempDefinitions::ID_NOT_FOUND;
+}
+
+
+// ...
+
+int x = DEFAULT_ID:
+
+*/
+
+#+END_EXAMPLE

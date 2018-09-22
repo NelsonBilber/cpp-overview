@@ -6,12 +6,16 @@
 
 *source code from*: https://en.cppreference.com/w/cpp/language/initialization
 
+#+begin_src C++
+
 Value initialization, e.g. std::string s{};
 Direct initialization, e.g. std::string s("hello");
 Copy initialization, e.g. std::string s = "hello";
 List initialization, e.g. std::string s{'a', 'b', 'c'};
 Aggregate initialization, e.g. char a[3] = {'a', 'b'};
 Reference initialization, e.g. char& c = a[0];
+
+#+end_src
 
 *source code from*: http://www.nuonsoft.com/blog/2017/08/09/c17-direct-vs-copy-list-initialization/
 
@@ -106,7 +110,9 @@ int main()
 {
 	IntArray array { 5, 4, 3, 2, 1 }; // initializer list
 	for (int count = 0; count < array.getLength(); ++count)
+	{
 		std::cout << array[count] << ' ';
+	}
  
 	return 0;
 }

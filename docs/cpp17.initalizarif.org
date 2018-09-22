@@ -1,0 +1,53 @@
+#+TITLE: Initalizer if-statement
+#+AUTHOR: Nelson Rodrigues
+
+
+
+It's a good pratice the declarion and the use of varibale shoulbe be the closes as possible
+
+After C++17 we can use initalizer if-statement
+
+
+#+BEGIN_EXAMPLE C++
+
+
+
+\\... 
+
+if (auto r = getGlobalObjectByName(word); !r) r->doSomething;
+The semantics are:
+
+if (init-statement; condition) statement
+The only difference from the "traditional" if-statement is the init-statement, which initializes a variable in the block scope, similar to for-loops.
+
+\\... 
+
+#+END_EXAMPLE
+
+*source from:*
+https://stackoverflow.com/questions/45999057/can-i-write-this-if-statement-with-a-variable-declaration-on-one-line
+
+
+#+BEGIN_EXAMPLE C++
+#include <iostream>
+
+using namespace std;
+
+bool IsVisible () { return true; }
+
+int main()
+{
+	if( auto b = IsVisible(); true )
+	{
+		cout << "is visible ... " << b << endl;
+	}
+	else
+	{
+		cout << "is not visible ...  "  << b << endl;
+	}
+
+	return 0;
+}
+
+
+#+END_EXAMPLE
