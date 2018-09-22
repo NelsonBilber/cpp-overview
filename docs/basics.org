@@ -23,15 +23,17 @@
 
 [[file:std_transform.org][std::transform]]
 
-*** Exceptions
-
-[[file:exception.org][exceptions]]
 
 *** Other examples
 
 Some source code examples for how to use STL utils
 
 [[https://github.com/NelsonBilber/cpp.stl][Source Code]]
+
+
+** Exceptions
+
+[[file:exceptions.org][exceptions]]
 
 
 ** Object Oriented Programming 
