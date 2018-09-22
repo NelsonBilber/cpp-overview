@@ -5,6 +5,19 @@
 
 *** C++17
 
+| Topic                    | Description                                       |
+|--------------------------+---------------------------------------------------|
+| initalization list       | [[cpp17.initialization.list][Initalization List]] |
+| inline variables         |                                                   |
+| anonymous namespaces     |                                                   |
+| nested namespaces        |                                                   |
+| template decuction       |                                                   |
+| initializer if-statement |                                                   |
+| structure unbinding      |                                                   |
+| string_view              |                                                   |
+| filesystem               |                                                   |
+| parallel algorithms      |                                                   |
+
 **** C++ 17 New rules for initalization Lists
 
 Example 01
@@ -658,6 +671,10 @@ int main()
 }
 
 #+END_SRC
+
+
+|-|-|
+
 
 *** Lambdas 
 

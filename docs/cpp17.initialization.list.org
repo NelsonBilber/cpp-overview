@@ -1,0 +1,114 @@
+#+title: C++ 17 New rules for initalization Lists
+#+author: Nelson Bilber Rodrigues
+
+
+** C++ Initalization types
+
+*source code from*: https://en.cppreference.com/w/cpp/language/initialization
+
+Value initialization, e.g. std::string s{};
+Direct initialization, e.g. std::string s("hello");
+Copy initialization, e.g. std::string s = "hello";
+List initialization, e.g. std::string s{'a', 'b', 'c'};
+Aggregate initialization, e.g. char a[3] = {'a', 'b'};
+Reference initialization, e.g. char& c = a[0];
+
+*source code from*: http://www.nuonsoft.com/blog/2017/08/09/c17-direct-vs-copy-list-initialization/
+
+
+** C++ 17 New rules for initalization Lists
+
+Fixes some cases with auto type deduction. The full background can be found in Auto and braced-init-lists, by Ville Voutilainen.
+
+It fixes the problem of deducing std::initializer_list like:
+
+#+BEGIN_SRC C++
+auto x = foo(); // copy-initialization
+auto x{foo}; // direct-initialization, initializes an initializer_list
+int x = foo(); // copy-initialization
+int x{foo}; // direct-initialization
+And for the direct initialization, new rules are:
+
+For a braced-init-list with only a single element, auto deduction will deduce from that entry;
+For a braced-init-list with more than one element, auto deduction will be ill-formed.
+Basically, auto x { 1 }; will be now deduced as int, but before it was an initializer list.
+
+#+END_SRC
+
+
+*source code from*: https://www.bfilipek.com/2017/01/cpp17features.html#new-auto-rules-for-direct-list-initialization
+
+
+** C++ std::initializer_list<T>
+
+https://en.cppreference.com/w/cpp/utility/initializer_list
+
+std::initializer_list<T>
+An object of type std::initializer_list<T> is a lightweight proxy object that provides access to an array of objects of type const T.
+
+*benefits of using initalization_list*
+https://stackoverflow.com/questions/40818262/benefits-of-stdinitializer-list-in-c11
+
+*Source code from* : https://www.learncpp.com/cpp-tutorial/10-7-stdinitializer_list/
+
+#+BEGIN_SRC C++
+
+#include <cassert> // for assert()
+#include <initializer_list> // for std::initializer_list
+#include <iostream>
+ 
+class IntArray
+{
+private:
+	int m_length;
+	int *m_data;
+ 
+public:
+	IntArray() :
+		m_length(0), m_data(nullptr)
+	{
+	}
+ 
+	IntArray(int length) :
+		m_length(length)
+	{
+		m_data = new int[length];
+	}
+ 
+	IntArray(const std::initializer_list<int> &list): // allow IntArray to be initialized via list initialization
+		IntArray(list.size()) // use delegating constructor to set up initial array
+	{
+		// Now initialize our array from the list
+		int count = 0;
+		for (auto &element : list)
+		{
+			m_data[count] = element;
+			++count;
+		}
+	}
+ 
+	~IntArray()
+	{
+		delete[] m_data;
+		// we don't need to set m_data to null or m_length to 0 here, since the object will be destroyed immediately after this function anyway
+	}
+ 
+	int& operator[](int index)
+	{
+		assert(index >= 0 && index < m_length);
+		return m_data[index];
+	}
+ 
+	int getLength() { return m_length; }
+};
+ 
+int main()
+{
+	IntArray array { 5, 4, 3, 2, 1 }; // initializer list
+	for (int count = 0; count < array.getLength(); ++count)
+		std::cout << array[count] << ' ';
+ 
+	return 0;
+}
+
+#+END_SRC

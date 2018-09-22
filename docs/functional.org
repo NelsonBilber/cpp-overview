@@ -1,10 +1,8 @@
 #+TITLE: C++ Functional Programming
 #+AUTHOR: Nelson Rodrigues
-#+TOC: headlines 5
 
 This is a very wide topic, It's a programming paradigm. With modern C++ has gain attention again.  
 Next link presents "just a simple" example how can be used in C++.
-
 
 [[file:cpp.functional.higherorderfunctions.org][higher order function]]
 
@@ -13,7 +11,7 @@ Next link presents "just a simple" example how can be used in C++.
 [[std_functional.org][std::functional]]
 
 
-** other examples
+** Other examples
 
 
 object A calls a function on object B 
