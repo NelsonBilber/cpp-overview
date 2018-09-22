@@ -17,21 +17,21 @@ Also presents useful resources for implement a workflow for a stack of developme
 Checkout my [[https://nelsonbilber.github.io][homepage]] for an alternative index and explore other technical programming topics. 
 
 
-| Topic                                                                  | Description                                                                                  |
-|------------------------------------------------------------------------+----------------------------------------------------------------------------------------------|
-| [[file:./docs/basics.org][Basics Concepts]]                            | RAII, Containers, Rule of Three, Five and Zero                                               |
+| Topic                    | Description                                                                                  |
+|--------------------------+----------------------------------------------------------------------------------------------|
+| [[file:./docs/basics.org][Basics Concepts]]          | RAII, Containers, Rule of Three, Five and Zero                                               |
 | [[file:./docs/containers.and.iterators.org][Containers and Iterators]] | STL Containers and Iterators                                                                 |
-| [[file:./docs/modern.cpp.org][Modern C++ (11/14/17)]]                  | Lambdas, Concepts, Move semantics, Monads                                                    |
-| [[file:./docs/metaprogramming.org][Template/Metaprogramming]]          | Argument Type Deduction, Explicit Specialization, Variadic Templates, Partial Specialization |
-| [[file:./docs/functional.org][Functional Programming]]                 | Small example how to use std <functional>                                                    |
-| [[file:./docs/multithreading.org][Multithreading]]                     | Small example how to use a "Working Queue Model" with Qt                                     |
-| [[file:./docs/unit.tests.org][Unit Tests]]                             | How to use Google-tests for unit testing (TDD)                                               |
-| [[file:./docs/dev.stack.org][Stack Of Developement]]                   | Recommendations for libs and tricks during all development cycles                            |
-| [[file:./docs/libs.org][Libraries]]                                    | Popular C++ libs                                                                             |
-| [[file:./docs/courses.org][Courses]]                                   | Web courses to polish C++ code skills                                                        |
-| [[file:./docs/books.org][Books]]                                       | Recomended books that covers basic and advanced concepts and best practices                  |
-| [[file:./docs/resources.org][Resources]]                               | Links, blogs, podcast, ...                                                                   |
-|------------------------------------------------------------------------+----------------------------------------------------------------------------------------------|
+| [[file:./docs/modern.cpp.org][Modern C++ (11/14/17)]]    | Lambdas, Concepts, Move semantics, Monads                                                    |
+| [[file:./docs/metaprogramming.org][Template/Metaprogramming]] | Argument Type Deduction, Explicit Specialization, Variadic Templates, Partial Specialization |
+| [[file:./docs/functional.org][Functional Programming]]   | Small example how to use std <functional>                                                    |
+| [[file:./docs/multithreading.org][Multithreading]]           | "Working Queue Model" with Qt, std::future and std::promises                                 |
+| [[file:./docs/unit.tests.org][Unit Tests]]               | How to use Google-tests for unit testing (TDD)                                               |
+| [[file:./docs/dev.stack.org][Stack Of Developement]]    | Recommendations for libs and tricks during all development cycles                            |
+| [[file:./docs/libs.org][Libraries]]                | Popular C++ libs                                                                             |
+| [[file:./docs/courses.org][Courses]]                  | Web courses to polish C++ code skills                                                        |
+| [[file:./docs/books.org][Books]]                    | Recomended books that covers basic and advanced concepts and best practices                  |
+| [[file:./docs/resources.org][Resources]]                | Links, blogs, podcast, ...                                                                   |
+|--------------------------+----------------------------------------------------------------------------------------------|
 
 
 

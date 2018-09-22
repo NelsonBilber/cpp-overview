@@ -1,4 +1,4 @@
-#+Title: C++ Basics concepts
+#+Title: C++ Basics 
 #+AUTHOR: Nelson Rodrigues
 #+TOC: headlines 5
 
@@ -17,151 +17,19 @@
 ** Smart pointers 
 [[https://github.com/NelsonBilber/cpp.smartpointers][Source Code]]
 
-** TODO STL 
+** STL 
 
-*** std::accumulate
+[[file:std_accumulate.org][std::accumulate]]
 
-#+BEGIN_EXAMPLE C++
-
-/*  C++ std::accumulate
-
-Computes the sum of the given value init and the elements in the range [first, last).
-
-source code from: https://en.cppreference.com/w/cpp/algorithm/accumulate
-
-*/
-
-#include <iostream>
-#include <vector>
-#include <numeric>
-#include <string>
-#include <functional>
- 
-int main()
-{
-    std::vector<int> v{1, 2, 3, 4, 5, 6, 7, 8, 9, 10};
- 
-    int sum = std::accumulate(v.begin(), v.end(), 0);
- 
-    int product = std::accumulate(v.begin(), v.end(), 1, std::multiplies<int>());
- 
-    std::string s = std::accumulate(std::next(v.begin()), v.end(),
-                                    std::to_string(v[0]), // start with first element
-                                    [](std::string a, int b) {
-                                        return a + '-' + std::to_string(b);
-                                    });
- 
-    std::cout << "sum: " << sum << '\n'
-              << "product: " << product << '\n'
-              << "dash-separated string: " << s << '\n';
-}
-
-
-#+END_EXAMPLE
-
-*** std::transform
-#+BEGIN_EXAMPLE C++
-
-/*  C++ std::transform
-
-std::transform applies the given function to a range and stores the result in another range, beginning at d_first.
-
-https://en.cppreference.com/w/cpp/algorithm/transform
-
-*/
-
-#include <algorithm>
-#include <cctype>
-#include <iostream>
-#include <string>
-#include <vector>
- 
-int main()
-{
-    std::string s("hello");
-    std::transform(s.begin(), s.end(), s.begin(),
-                   [](unsigned char c) -> unsigned char { return std::toupper(c); });
-				   
-	std::cout << s << std::endl;
-				   
-	return 0;
- }
-
-
-#+END_EXAMPLE
+[[file:std_transform.org][std::transform]]
 
 *** Exceptions
 
-#+BEGIN_EXAMPLE C++
-
-/*  C++ 17 exception and no-exception 
-
-https://msdn.microsoft.com/en-us/library/4tebey8h.aspx
-
-"...  When the catch statement is reached, all of the automatic variables that are in scope
-between the throw and catch statements are destroyed in a process that is known as stack unwinding ..."
-
-https://docs.microsoft.com/en-us/cpp/cpp/exceptions-and-stack-unwinding-in-cpp?view=vs-2017
-
-"... Prior to C++17 there were two kinds of exception specification. The noexcept specification
-was new in C++11. It specifies whether the set of potential exceptions that can escape the function
-is empty. The dynamic exception specification, or throw(optional_type_list) specification, was deprecated
-in C++11 and removed in C++17, except for throw(), which is an alias for noexcept(true). 
-This exception specification was designed to provide summary information about what exceptions can be thrown 
-out of a function, but in practice it was found to be problematic ..."
-
-https://docs.microsoft.com/en-us/cpp/cpp/exception-specifications-throw-cpp?view=vs-2017
-
-
-noexcept
--It turns an exception throw into a call to std::terminate().
--One can make a compile-time query if the function has been declared as noexcept.
-
-https://akrzemi1.wordpress.com/2014/04/24/noexcept-what-for/
-*/
-
-#include <iostream>
-#include <functional>
-
-using namespace std;
-
-void test(int i) noexcept
-{
-	if(i == 0)
-		throw 2.0;
-	else
-		cout << "i = " << i << endl;
-}
-
-int main()
-{
-	int * x = nullptr;
-	try
-	{
-		test(10);
-		test(0);
-		
-		x = new int();
-		throw 20;
-	}
-	catch ( double e )
-	{
-		delete x;
-		cout << "An exception (double) = " << e << endl;
-	}
-	catch ( int e )
-	{
-		delete x;
-		cout << "An exception (int) = " << e << endl;
-	}
-	
-	cout << "end";
-	return 0;
-}
-
-#+END_EXAMPLE
+[[file:exception.org][exceptions]]
 
 *** Other examples
+
+Some source code examples for how to use STL utils
 
 [[https://github.com/NelsonBilber/cpp.stl][Source Code]]
 
@@ -170,9 +38,11 @@ int main()
 
 [[https://github.com/NelsonBilber/cpp.oop][Source Code]]
 
+
 ** The rule of three/five/zero 
 
 [[https://github.com/NelsonBilber/cpp.movesemantics][Source Code]]
+
 
 ** TODO Translation Unit
 
@@ -245,6 +115,7 @@ http://www.goldsborough.me/c/c++/linker/2016/03/30/19-34-25-internal_and_externa
 https://stackoverflow.com/questions/998425/why-does-const-imply-internal-linkage-in-c-when-it-doesnt-in-c
 https://stackoverflow.com/questions/998425/why-does-const-imply-internal-linkage-in-c-when-it-doesnt-in-c
 
+
 ** TODO Name Mangling vs Virtual Functions vs Function Overloading
 In compiler construction, name mangling (also called name decoration) is a technique used to solve various problems caused by the need to resolve unique names for programming entities in many modern programming languages.
 It provides a way of encoding additional information in the name of a function, structure, class or another datatype in order to pass more semantic information from the compilers to linkers.
@@ -262,6 +133,7 @@ It is a classification of static polymorphism in which a function call is resolv
 Function overloading is usually associated with statically-typed programming languages that enforce type checking in function calls. An overloaded function is really just a set of different functions that happen to have the same name. 
 
 https://en.wikipedia.org/wiki/Function_overloading
+
 
 ** TODO void*
 

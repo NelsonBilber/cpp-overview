@@ -1,0 +1,29 @@
+#+title: std::transform
+#+author: Nelson Rodrigues
+
+
+std::transform applies the given function to a range and stores the result in another range, beginning at d_first.
+
+*source code from:* https://en.cppreference.com/w/cpp/algorithm/transform
+
+
+#+BEGIN_EXAMPLE C++
+
+#include <algorithm>
+#include <cctype>
+#include <iostream>
+#include <string>
+#include <vector>
+ 
+int main()
+{
+    std::string s("hello");
+    std::transform(s.begin(), s.end(), s.begin(),
+                   [](unsigned char c) -> unsigned char { return std::toupper(c); });
+				   
+	std::cout << s << std::endl;
+				   
+	return 0;
+ }
+
+#+END_EXAMPLE
