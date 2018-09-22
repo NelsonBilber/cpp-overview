@@ -2,35 +2,28 @@
 #+AUTHOR: Nelson Rodrigues
 
 
-wip!!!
 
-** TODO Containers
+** Containers
 
-Text from book "C++ 17 STL Cookbook"
+*Text extracted from book*: "C++ 17 STL Cookbook"
+
+**** Summary
 
 *Types of containers*
+
 The standard containers implement structures that are commonly used in our programs, such as:
+
 - dynamic arrays
 - queues
 - stacks
 - linked lists
 - trees
 - associative sets
+
 The C++ container library categorizes containers into four types:
-- Sequence containers
-- Sequence container adapters
-- Associative containers
-- Unordered associative containers
-Container adaptors
-- stack (stack can be implemented on top of vector, deque or list)
-- queue (queue can be implemented on top of deque or list)
-- priority_queue (priority_queue can be implemented on top of deque or vector)
-Hashtables
-- unordered_set
-- unordered_multiset
-- unordered_map
-- unordered_multimap
-**** SEQUENCE CONTAINERS
+
+***** Sequence containers
+
 Sequence containers are used for data structures that store objects of the same type in a linear manner.
 The STL SequenceContainer types are:
 - array provides a static contiguous array
@@ -39,14 +32,18 @@ The STL SequenceContainer types are:
 - list provides a doubly-linked list
 - deque provides a double-ended queue, where elements can be added to the front or back of the queue.
 While std::string is not included in most container lists, it does in fact meet the requirements of a SequenceContainer.	
-**** CONTAINER ADAPTERS
+
+***** Sequence container adapters
+
 Container adapters are a special type of container class. They are not full container classes on their own, but wrappers around other container types (such as a vector, deque, or list). These container adapters encapsulate the underlying container type and limit the user interfaces accordingly.
 Let's consider std::stack. std::stack is a container that enforces a LIFO-type data structure. Here's the declaration of std::stack:
 The standard container adapters are:
-- stack provides an LIFO data structure
-- queue provides a FIFO data structure
-- priority_queue provides a priority queue, which allows for constant-time lookup of the largest element (by default)
-**** ASSOCIATIVE CONTAINERS
+- *stack* provides an LIFO data structure, stack can be implemented on top of vector, deque or list
+- *queue* provides a FIFO data structure, queue can be implemented on top of deque or list
+- *priority_queue* provides a priority queue, which allows for constant-time lookup of the largest element (by default), priority_queue can be implemented on top of deque or vector
+
+***** Associative containers
+
 Associative containers provide sorted data structures that provide a fast lookup (O(log n) time) using keys.
 The STL AssociativeContainer types are can be divided in two ways: containers which require unique keys, and those which allow multiple entries using the same key.
 #Keys are unique
@@ -56,7 +53,9 @@ The STL AssociativeContainer types are can be divided in two ways: containers wh
 - multiset is a collection of keys, sorted by keys
 - multimap is a collection of key-value pairs, sorted by keys
 - Note that set and map are typically implemented using red-black trees.
-**** UNORDERED ASSOCIATIVE CONTAINERS
+
+***** Unordered associative containers
+
 Unordered associative containers provide unsorted data structures that can be accessed using a hash. Access times are O(n) in the worst-case, but much faster than linear time for most operations.
 For all STL UnorderedAssociativeContainer types, a hashed key is used to access the data. Similar to the AssociativeContainer, the standard types are split between those that require unique keys, and those that do not:
 *Keys are unique*
@@ -65,18 +64,30 @@ For all STL UnorderedAssociativeContainer types, a hashed key is used to access 
 *Multiple entires for the same key are permitted*
 - unordered_multiset is a collection of keys, hashed by keys
 - unordered_multimap is a collection of key-value pairs, hashed by keys
+
+
+***** Hashtables
+
+C++ doesn't have natively a container called "hash" they are called unorder_map or unorder_set, under the wood they are hastables
+
+- unordered_set
+- unordered_multiset
+- unordered_map
+- unordered_multimap
+
 **** Standard Container Thread Safety
+
 I want to share with you some relevant points regarding container thread safety, as many embedded systems will likely require sharing objects across threads.
 All container functions are safe to be called concurrently on different objects of the same container type.
 For operating on objects of the same type, the following guidelines are helpful to keep in mind:
-All const member functions can be called concurrently by different threads
-The following member functions are thread-safe: begin(), end(), rbegin(), rend(), front(), back(), data(), find(), lower_bound(), upper_bound(), equal_range(), at()
-Operator [] is thread-safe for sequence containers, unordered associative containers, and container adapters.
-Operator [] is NOT thread-safe for associative containers!
-Different elements in the same container can be modified concurrently, except for the elements of std::vector<bool>.
-Iterator operations read from a container, but do not modify it, so they are thread-safe
-Container operations that invalidate iterators are NOT thread-safe, as they modify the container
-In general, common-sense concurrency rules apply. If you are modifying the container in multiple threads, you will need to protect that container to prevent concurrent access.
+- All const member functions can be called concurrently by different threads
+- The following member functions are thread-safe: begin(), end(), rbegin(), rend(), front(), back(), data(), find(), lower_bound(), upper_bound(), equal_range(), at()
+- Operator [] is thread-safe for sequence containers, unordered associative containers, and container adapters.
+- Operator [] is NOT thread-safe for associative containers!
+- Different elements in the same container can be modified concurrently, except for the elements of std::vector<bool>.
+- Iterator operations read from a container, but do not modify it, so they are thread-safe
+- Container operations that invalidate iterators are NOT thread-safe, as they modify the container
+- In general, common-sense concurrency rules apply. If you are modifying the container in multiple threads, you will need to protect that container to prevent concurrent access.
 
 
 ** TODO Iterators
@@ -163,6 +174,7 @@ second argument, which is a string that shall be pushed into the output
 stream after each item. That is usefulÂ because this way we can print a
 separatingÂ "," Â or a new line after each item.
 
+
 ** TODO When to use it ?
 
 *Nice Flowchart !!!*
@@ -232,13 +244,17 @@ https://baptiste-wicht.com/posts/2012/12/cpp-benchmark-vector-list-deque.html
 - std::list allocates memory by node
 
 
-** TODO Important Notes
+** Important Notes
+
 ****  Vector should be used by default as the (sequence) container:
-It is more (space and time) efficient than other STL containers.
-It is more convenient and safer than primitive array.
-automatic memory management
-rich interface
+
+- It is more (space and time) efficient than other STL containers.
+- It is more convenient and safer than primitive array.
+- automatic memory management
+- rich interface
+
 **** Associative containers properties
+
 The underlying data structure is a balanced search tree:
 - logarithmic access time
 - requires order comparisons of keys
@@ -246,6 +262,8 @@ The underlying data structure is a balanced search tree:
 - Iterators, pointers and references stay valid until the pointed to element is removed.
 
 
-** TODO Links
+** Links and References
+
 https://www.cs.helsinki.fi/u/tpkarkka/alglib/k06/lectures/containers.html
+
 https://arne-mertz.de/2018/05/modern-c-features-stdvariant-and-stdvisit/
