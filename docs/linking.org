@@ -1,0 +1,61 @@
+#+title: Internal linking vs External Linking
+#+author: Nelson Rodrigues
+
+
+A1:
+
+When you write an implementation file (.cpp, .cxx, etc) your compiler generates a translation unit. This is the object file from your implementation file plus all the headers you #included in it.
+*Internal linkage* refers to everything only in scope of a translation unit.
+*External linkage* refers to things that exist beyond a particular translation unit. In other words, accessible through the whole program, which is the combination of all translation units (or object files).
+
+A2:
+
+As dudewat said external linkage means the symbol (function or global variable) is accessible throughout your program and internal linkage means that it's only accessible in one translation unit.
+
+You can explicitly control the linkage of a symbol by using the extern and static keywords. If the linkage isn't specified then the default linkage is extern for non-const symbols and static (internal) for const symbols.
+
+#+BEGIN_SRC C++
+
+// in namespace or global scope
+int i; // extern by default
+const int ci; // static by default
+extern const int eci; // explicitly extern
+static int si; // explicitly static
+
+// the same goes for functions (but there are no const functions)
+int foo(); // extern by default
+static int bar(); // explicitly static 
+
+#+END_SRC
+
+Note that instead of using static for internal linkage it is better to use anonymous namespaces into which you can also put classes. The linkage for anonymous namespaces has changed between C++98 and C++11 but the main thing is that they are unreachable from other translation units.
+
+#+BEGIN_SRC C++
+
+namespace {
+   int i; // external linkage but unreachable from other translation units.
+   class invisible_to_others { };
+}
+
+#+END_SRC
+
+
+A3:
+
+A translation unit refers to an implementation (.c/.cpp) file and all header (.h/.hpp) files it includes. If an object or function inside such a translation unit has internal linkage, then that specific symbol is only visible to the linker within that translation unit. If an object or function has external linkage, the linker can also see it when processing other translation units. The static keyword, when used in the global namespace, forces a symbol to have internal linkage. The extern keyword results in a symbol having external linkage.
+
+The compiler defaults the linkage of symbols such that:
+
+    Non-const global variables have external linkage by default
+    Const global variables have internal linkage by default
+    Functions have external linkage by default
+
+*Text extracted from:*
+
+http://www.goldsborough.me/c/c++/linker/2016/03/30/19-34-25-internal_and_external_linkage_in_c++/
+
+https://stackoverflow.com/questions/1358400/what-is-external-linkage-and-internal-linkage
+
+http://www.goldsborough.me/c/c++/linker/2016/03/30/19-34-25-internal_and_external_linkage_in_c++/
+
+https://stackoverflow.com/questions/998425/why-does-const-imply-internal-linkage-in-c-when-it-doesnt-in-c

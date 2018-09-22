@@ -1,0 +1,101 @@
+#+title: Deep copy vs shallow copy
+#+author: Nelson Rodrigues
+
+
+Note. differences is on copy constructor()
+
+With a shallow copy, if the thing you're copying has a pointer to some data, you don't make a copy of that data and both objects (the original and the copy) share that same data (so changing the data in one object also changes it in the other, because they're both using that exact same data). 
+
+
+
+Difference between Shallow copy and Deep copy
+
+An object copy is a process where a data object has its attributes copied to another object of the same data type. In .Net Shallow copy and deep copy are used for copying data between objects.
+
+What is Shallow copy ?
+shallow-copy c# vb.net
+
+Shallow copying is creating a new object and then copying the non static fields of the current object to the new object. If the field is a value type, a bit by bit copy of the field is performed. If the field is a reference type, the reference is copied but the referred object is not, therefore the original object and its clone refer to the same object. A shallow copy of an object is a new object whose instance variables are identical to the old object. In .Net shallow copy is done by the object method MemberwiseClone().
+
+The situations like , if you have an object with values and you want to create a copy of that object in another variable from same type, then you can use shallow copy, all property values which are of value types will be copied, but if you have a property which is of reference type then this instance will not be copied, instead you will have a reference to that instance only.
+
+What is Deep copy ?
+deep-copy c# vb.net
+
+Deep copy is creating a new object and then copying the non-static fields of the current object to the new object. If a field is a value type, a bit by bit copy of the field is performed. If a field is a reference type, a new copy of the referred object is performed. A deep copy of an object is a new object with entirely new instance variables, it does not share objects with the old. While performing Deep Copy the classes to be cloned must be flagged as [Serializable].
+
+Deep copy is intended to copy all the elements of an object, which include directly referenced elements of value type and the indirectly referenced elements of a reference type that holds a reference to a memory location that contains data rather than containing the data itself.
+
+*Text and code from:*
+https://owlcation.com/stem/Copy-Constructor-shallow-copy-vs-deep-copy
+
+
+#+BEGIN_SRC C++
+
+#include "stdafx.h"
+#include <iostream>
+using namespace std;
+ 
+class ShalloC
+{
+//Sample 01: Private Data Member
+private:
+    int * x;
+ 
+public:
+    //Sample 02: Constructor with single parameter
+    ShalloC(int m)
+    {
+        x = new int;
+        *x = m;
+    }
+ 
+    //Sample 08: Introduce Copy Constructor and perform Deep Copy
+    ShalloC(const ShalloC& obj)
+    {
+        x = new int;
+        *x = obj.GetX();
+    }
+ 
+    //Sample 03: Get and Set Functions
+    int GetX() const
+    {
+        return *x;
+    }
+    void SetX(int m)
+    {
+        *x = m;
+    }
+ 
+    //Sample 04: Print Function
+    void PrintX()
+    {
+        cout << "Int X=" << *x << endl;
+    }
+ 
+    //Sample 05: DeAllocate the heap
+    ~ShalloC()
+    {
+        delete x;
+    }
+};
+ 
+int main()
+{
+    //Sample 06: Create Object 1 and copy that to Object 2.
+    //           Print the data member for both Object 1 & 2.
+    ShalloC ob1(10);
+    ShalloC ob2 = ob1 ;
+    ob1.PrintX();
+    ob2.PrintX();
+ 
+    //Sample 07: Change the Data member value of Object 1
+    //           And print both Object 1 and Object 2
+    ob1.SetX(12);
+    ob1.PrintX();
+    ob2.PrintX();
+}
+
+#+END_SRC
+
+http://net-informations.com/faq/net/shallow-deep-copy.htm

@@ -1,0 +1,64 @@
+#+title: void*
+#+author: Nelson Rodrigues
+
+
+*void pointers*
+The void type of pointer is a special type of pointer. In C++, void represents the absence of type. Therefore, void pointers are pointers that point to a value that has no type (and thus also an undetermined length and undetermined dereferencing properties).
+
+This gives void pointers a great flexibility, by being able to point to any data type, from an integer value or a float to a string of characters. In exchange, they have a great limitation: the data pointed to by them cannot be directly dereferenced (which is logical, since we have no type to dereference to), and for that reason, any address in a void pointer needs to be transformed into some other pointer type that points to a concrete data type before being dereferenced.
+
+One of its possible uses may be to pass generic parameters to a function. For example: 
+
+*Text from:*
+http://www.cplusplus.com/doc/tutorial/pointers/
+
+
+A pointer to void is a "generic" pointer type. A void * can be converted to any other pointer type without an explicit cast. You cannot dereference a void * or do pointer arithmetic with it; you must convert it to a pointer to an complete data type first.
+
+It gets used in places where you need to be able to work with different pointer types in the same code. One commonly cited example is the library function qsort:
+
+#+begin_src C++
+	
+void qsort(void *base, size_t nmemb, size_t size, 
+           int (*compar)(const void *, const void *));
+base is the address of an array, nmemb is the number of elements in the array, size is the size of each element, and compar is a pointer to a function that compares two elements of the array. It gets called like so:
+
+int iArr[10];
+double dArr[30];
+long lArr[50];
+...
+qsort(iArr, sizeof iArr/sizeof iArr[0], sizeof iArr[0], compareInt);
+qsort(dArr, sizeof dArr/sizeof dArr[0], sizeof dArr[0], compareDouble);
+qsort(lArr, sizeof lArr/sizeof lArr[0], sizeof lArr[0], compareLong);
+The array expressions iArr, dArr, and lArr are implicitly converted from array types to pointer types in the function call, and each is implicitly converted from "pointer to int/double/long" to "pointer to void".
+
+//The comparison functions would look something like:
+
+int compareInt(const void *lhs, const void *rhs)
+{
+  const int *x = lhs;  // convert void * to int * by assignment
+  const int *y = rhs;
+
+  if (*x > *y) return 1;
+  if (*x == *y) return 0;
+  return -1;
+}
+
+#+end_src
+
+By accepting void *, qsort can work with arrays of any type.
+
+The disadvantage of using void * is that you throw type safety out the window and into oncoming traffic. There's nothing to protect you from using the wrong comparison routine:
+
+qsort(dArr, sizeof dArr/sizeof dArr[0], sizeof dArr[0], compareInt);
+compareInt is expecting its arguments to be pointing to ints, but is actually working with doubles. There's no way to catch this problem at compile time; you'll just wind up with a mis-sorted array.
+
+*Text from:*
+https://stackoverflow.com/questions/11626786/what-does-void-mean-and-how-to-use-it
+
+11 standard (n1570) §6.2.2.3 al1 p55 says :
+A pointer to void may be converted to or from a pointer to any object type. A pointer to any object type may be converted to a pointer to void and back again; the result shall compare equal to the original pointer.
+You can use this generic pointer to store a pointer to any object type, but you can't use usual arithmetic operations with it and you can't deference it.
+
+*Text from:*
+https://stackoverflow.com/questions/11626786/what-does-void-mean-and-how-to-use-it

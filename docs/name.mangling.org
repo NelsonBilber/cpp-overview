@@ -1,0 +1,20 @@
+#+title:Name Mangling vs Virtual Functions vs Function Overloading
+#+author: Nelson Rodrigues
+
+
+In compiler construction, name mangling (also called name decoration) is a technique used to solve various problems caused by the need to resolve unique names for programming entities in many modern programming languages.
+It provides a way of encoding additional information in the name of a function, structure, class or another datatype in order to pass more semantic information from the compilers to linkers.
+The need arises where the language allows different entities to be named with the same identifier as long as they occupy a different namespace (where a namespace is typically defined by a module, class, or explicit namespace directive) or have different signatures (such as function overloading).
+Any object code produced by compilers is usually linked with other pieces of object code (produced by the same or another compiler) by a type of program called a linker. The linker needs a great deal of information on each program entity. For example, to correctly link a function it needs its name, the number of arguments and their types, and so on.
+https://en.wikipedia.org/wiki/Name_mangling 
+
+In object-oriented programming, in languages such as C++, and Object Pascal, a virtual function or virtual method is an inheritable and overridable function or method for which dynamic dispatch is facilitated. This concept is an important part of the (runtime) polymorphism portion of object-oriented programming (OOP). In short, a virtual function defines a target function to be executed, but the target might not be known at compile time.
+https://en.wikipedia.org/wiki/Virtual_function
+
+Rules in function overloading
+The same function name is used for more than one function definition
+The functions must differ either by the arity or types of their parameters
+It is a classification of static polymorphism in which a function call is resolved using some "best match" algorithm, where the particular function to call is resolved by finding the best match of the formal parameter types with the actual parameter types. The details of this algorithm vary from language to language.
+Function overloading is usually associated with statically-typed programming languages that enforce type checking in function calls. An overloaded function is really just a set of different functions that happen to have the same name. 
+
+https://en.wikipedia.org/wiki/Function_overloading
