@@ -1,21 +1,6 @@
 #+TITLE: Using lambda as callback 
 #+AUTHOR: Nelson Rodrigues
 
-https://gist.github.com/4poc/3155832
-http://bannalia.blogspot.com/2016/07/passing-capturing-c-lambda-functions-as.html
-https://embeddedartistry.com/blog/2017/1/26/c11-improving-your-callback-game
-
-# this blog has a complex example "Type safe callbacks (full example, supports capturing lambdas)"
-http://meh.schizofreni.co/programming/magic/2013/01/23/function-pointer-from-lambda.html
-
-# functors in c++
-https://stackoverflow.com/questions/356950/what-are-c-functors-and-their-uses
-
-# function pointers in C
-https://www.geeksforgeeks.org/function-pointer-in-c/
-
-
-
 #+BEGIN_SRC C++
 
 #include <iostream>
@@ -128,3 +113,20 @@ int main()
 }
 
 #+END_SRC
+
+
+** References
+
+https://gist.github.com/4poc/3155832
+http://bannalia.blogspot.com/2016/07/passing-capturing-c-lambda-functions-as.html
+https://embeddedartistry.com/blog/2017/1/26/c11-improving-your-callback-game
+
+# this blog has a complex example "Type safe callbacks (full example, supports capturing lambdas)"
+http://meh.schizofreni.co/programming/magic/2013/01/23/function-pointer-from-lambda.html
+
+# functors in c++
+https://stackoverflow.com/questions/356950/what-are-c-functors-and-their-uses
+
+# function pointers in C
+https://www.geeksforgeeks.org/function-pointer-in-c/
+

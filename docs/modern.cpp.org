@@ -4,31 +4,31 @@
 
 *** C++17
 
-| Topic                    | Description                                                          |
-|--------------------------+----------------------------------------------------------------------|
-| initalization list       | more ...  [[file:cpp17.initialization.list.org][Initalization List]] |
-| inline variables         | more ...  [[file:cpp17.inline.org][inline variables]]                |
-| anonymous namespaces     | more ...  [[file:cpp17.anonym.org][anonymous namespaces]]            |
-| nested namespaces        | more ...  [[file:cpp17.nested.org][nested namespaces]]               |
-| template decuction       | more ...  [[file:cpp17.template.deduction.org][template deduction]]  |
-| initializer if-statement | more ...  [[file:cpp17.initalizarif.org][initializer if-statement]]  |
-| structure unbinding      | more ...  [[file:cpp17.structure.binding.org][structure binding]]    |
-| string_view              | more ...  [[file:cpp17.string.view.org][string_view]]                |
-| filesystem               | more ...  [[file:cpp17.filesystem.org][filesystem]]                  |
-| parallel algorithms      | more ...  [[file:cpp17.palgorithms.org][Parallel Algorithms]]        |
+| Topic                    | Description                                                           |
+|--------------------------+-----------------------------------------------------------------------|
+| initalization list       | more (...) [[file:cpp17.initialization.list.org][Initalization List]] |
+| inline variables         | more (...) [[file:cpp17.inline.org][inline variables]]                |
+| anonymous namespaces     | more (...) [[file:cpp17.anonym.org][anonymous namespaces]]            |
+| nested namespaces        | more (...) [[file:cpp17.nested.org][nested namespaces]]               |
+| template decuction       | more (...) [[file:cpp17.template.deduction.org][template deduction]]  |
+| initializer if-statement | more (...) [[file:cpp17.initalizarif.org][initializer if-statement]]  |
+| structure unbinding      | more (...) [[file:cpp17.structure.binding.org][structure binding]]    |
+| string_view              | more (...) [[file:cpp17.string.view.org][string_view]]                |
+| filesystem               | more (...) [[file:cpp17.filesystem.org][filesystem]]                  |
+| parallel algorithms      | more (...) [[file:cpp17.palgorithms.org][Parallel Algorithms]]        |
 
 
 
 *** Lambdas 
 
 
-| Topic                 | Description                                                                |
-|-----------------------+----------------------------------------------------------------------------|
-| lambda recursive      | more info ... [[file:lambda.recursive.org][lambda recursive]]              |
-| capture *this (c++17) | more info ... [[file:lambda.this.org][*this (C++17)]]                      |
-| lambdas as callback   | more info ... [[file:lambda.callback.org][lambda as callback]]             |
-| monads                | more info ... [[https://github.com/NelsonBilber/cpp.monads][Source Code]]  |
-| others                | more info ... [[https://github.com/NelsonBilber/cpp.lambdas][Source Code]] |
+| Topic                       | Description                                                                |
+|-----------------------------+----------------------------------------------------------------------------|
+| lambda recursive	    | more (...) [[file:lambda.recursive.org][lambda recursive]]		 |
+| capture *this (c++17)       | more (...) [[file:lambda.this.org][*this (C++17)]]			 |
+| lambdas as callback	 | more (...) [[file:lambda.callback.org][lambda as callback]]	        |
+| monads		      | more (...) [[https://github.com/NelsonBilber/cpp.monads][Source Code]]     |
+| others		      | more (...) [[https://github.com/NelsonBilber/cpp.lambdas][Source Code]]    |
 
 
 *** mutable
