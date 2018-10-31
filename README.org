@@ -19,7 +19,7 @@ Checkout my [[https://nelsonbilber.github.io][homepage]] for an alternative inde
 
 | Topic                    | Description                                                                                  |
 |--------------------------+----------------------------------------------------------------------------------------------|
-| [[file:./docs/basics.org][Basics Concepts]]          | RAII, Containers, Rule of Three, Five and Zero, Exceptions, Linking, void*, ...              |
+| [[file:./docs/basics.org][Basics]]          | RAII, Containers, Rule of Three, Five and Zero, Exceptions, Linking, void*, ...              |
 | [[file:./docs/containers.and.iterators.org][Containers and Iterators]] | STL Containers and Iterators                                                                 |
 | [[file:./docs/modern.cpp.org][Modern C++ (11/14/17)]]    | Lambdas ( recursive, *this), Concepts, Move semantics, Monads, C++ 17                        |
 | [[file:./docs/metaprogramming.org][Template/Metaprogramming]] | Argument Type Deduction, Explicit Specialization, Variadic Templates, Partial Specialization |
