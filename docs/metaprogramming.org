@@ -58,5 +58,5 @@ Source code from : [[http://www.modernescpp.com/index.php/component/content/arti
 
 **** Reference
 
-[[The Future of Generic Programming%0Aor %0AHow to design good concepts and use them well]]
+[[http://www.stroustrup.com/good_concepts.pdf][Concepts: The Future of Generic Programming]]
 
