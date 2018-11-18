@@ -33,6 +33,9 @@ Checkout my [[https://nelsonbilber.github.io][homepage]] for an alternative inde
 | [[file:./docs/resources.org][Resources]]                | Links, blogs, podcast, ...                                                                                      |
 |--------------------------+-----------------------------------------------------------------------------------------------------------------|
 
+**** Quick Access
+
+[[https://github.com/NelsonBilber/cpp_clean_project][Clean C++ Project Template]]
 
 **** Logo Copyrights
 
