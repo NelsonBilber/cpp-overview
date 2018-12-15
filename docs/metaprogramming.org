@@ -23,7 +23,7 @@ A very powerful programming technique. The follow examples explain how to use on
 
 **  since C++20 
 
-- concepts [[https://https://github.com/NelsonBilber/cpp-overview/blob/master/docs/concepts.org][more ...]]
+- Concepts [[https://github.com/NelsonBilber/cpp-overview/blob/master/docs/concepts.org][More information ...]]
 
 
 
