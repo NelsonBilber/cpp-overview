@@ -15,6 +15,12 @@ A very powerful programming technique. The follow examples explain how to use on
 - Explicit Specialization [[https://github.com/NelsonBilber/cpp.templates.class1.basic][Source Code]]
 - Partial Specialization [[https://github.com/NelsonBilber/cpp.templates.class3.partial.specialization][Source Code]]
 - Alias [[https://github.com/NelsonBilber/cpp.templates.class4.typealias][Source Code]]
+
+** Template Patterns
+
+- Tag Dispatching [[https://github.com/NelsonBilber/cpp.tag-dispatching][Source Code]]
+- C++ Curiously recurring template pattern [[https://github.com/NelsonBilber/cpp.crtp.template.pattern][Source Code]] 
+
 ** Concepts ( since C++20 )
 
 Concepts were idealized to simply generic programming. To design some constraints to a generic type, code star to became difficult to read and hard to maintain. 
