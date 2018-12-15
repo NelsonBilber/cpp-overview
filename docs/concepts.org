@@ -38,3 +38,9 @@ int main()
 #+end_src
 
 Source code from : [[http://www.modernescpp.com/index.php/component/content/article/42-blog/functional/288-defintion-of-concepts?Itemid=239#h1-two-forms][ModernsCpp - two forms]]
+
+
+**** Reference
+
+[[http://www.stroustrup.com/good_concepts.pdf][Concepts: The Future of Generic Programming]]
+

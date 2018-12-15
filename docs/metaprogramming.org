@@ -25,9 +25,3 @@ A very powerful programming technique. The follow examples explain how to use on
 
 - Concepts [[https://github.com/NelsonBilber/cpp-overview/blob/master/docs/concepts.org][More information ...]]
 
-
-
-**** Reference
-
-[[http://www.stroustrup.com/good_concepts.pdf][Concepts: The Future of Generic Programming]]
-
