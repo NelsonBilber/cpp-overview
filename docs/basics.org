@@ -16,7 +16,7 @@ Important concepts about C++ programming language
 | Exception                                     | More information ...  [[file:exceptions.org][exceptions]]                                |
 | Object Oriented programming                   | More information ...  [[https://github.com/NelsonBilber/cpp.oop][Source Code]]           |
 | The Rule of Three/five/zero                   | More information ...  [[https://github.com/NelsonBilber/cpp.movesemantics][Source Code]] |
-| Translation Units                             | More information ...  [[file:translation.unit.org][Translation Unit]]                    |
+| Translation Units                             | More information ...  [[file:trasnlation.unit.org][Translation Unit]]                    |
 | Internal linking vs External Linking          | More information ...  [[file:linking.org][Internal and External Linking]]                |
 | Name mangling vs Virtual Function Overloading | More information ...  [[file:name.mangling.org][Name Mangling]]                          |
 | void*                                         | More information ...  [[file:void.ptr.org][void*]]                                       |
